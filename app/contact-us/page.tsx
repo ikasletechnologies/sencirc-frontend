@@ -13,8 +13,10 @@ export default function ContactUs() {
         ]} 
       />
       
-      <ContactForm />
-      <OurOffices />
+      <div id="content" className="w-full scroll-mt-16 md:scroll-mt-20">
+        <ContactForm />
+        <OurOffices />
+      </div>
     </main>
   );
 }

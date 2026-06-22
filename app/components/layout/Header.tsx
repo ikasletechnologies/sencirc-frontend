@@ -3,10 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Return null if we are on an admin page
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +29,10 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { name: 'VERTICALS & PORTFOLIO', href: '/#verticals' },
-    { name: 'KNOWLEDGE HUB', href: '/knowledge-hub' },
-    { name: 'OUR TEAM', href: '/our-team' },
-    { name: 'CONTACT US', href: '/contact-us' },
+    { name: 'VERTICALS & PORTFOLIO', href: '/vertical-portfolio#content' },
+    { name: 'KNOWLEDGE HUB', href: '/knowledge-hub#content' },
+    { name: 'OUR TEAM', href: '/our-team#content' },
+    { name: 'CONTACT US', href: '/contact-us#content' },
   ];
 
   return (
@@ -45,14 +52,14 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Centered Desktop Navigation */}
-        <div className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none z-10">
-          <nav className="flex items-center gap-10 pointer-events-auto">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex flex-1 items-center justify-end pr-8 pointer-events-none z-10">
+          <nav className="flex items-center gap-5 xl:gap-10 pointer-events-auto">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className={`font-bold text-sm tracking-wide transition-colors whitespace-nowrap ${isScrolled || isMobileMenuOpen ? 'text-[#104b36] hover:text-[#5ca35e]' : 'text-white hover:text-gray-200'}`}
+                className={`font-bold text-[13px] xl:text-sm tracking-wide transition-colors whitespace-nowrap ${isScrolled || isMobileMenuOpen ? 'text-[#104b36] hover:text-[#5ca35e]' : 'text-white hover:text-gray-200'}`}
               >
                 {link.name}
               </Link>
@@ -60,8 +67,8 @@ export default function Header() {
           </nav>
         </div>
         
-        {/* Spacer to push mobile button to the right */}
-        <div className="flex-1"></div>
+        {/* Spacer to push mobile button to the right (only needed on mobile now) */}
+        <div className="flex-1 lg:hidden"></div>
 
         {/* Mobile Menu Button */}
         <button 

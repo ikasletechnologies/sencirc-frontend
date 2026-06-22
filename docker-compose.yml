@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: sencirc-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sencirc_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - sencirc-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  sencirc-postgres-data:

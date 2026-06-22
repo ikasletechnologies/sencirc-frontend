@@ -13,7 +13,9 @@ export default function KnowledgeHub() {
                 { name: "Knowledge Hub" }
               ]} 
             />
-            <FactsAndInsights />
+            <div id="content" className="w-full scroll-mt-16 md:scroll-mt-20">
+              <FactsAndInsights />
+            </div>
         </main>
     );
 }

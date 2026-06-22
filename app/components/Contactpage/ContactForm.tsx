@@ -1,7 +1,33 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import { Phone } from 'lucide-react';
 
 export default function ContactForm() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+    }
+  };
   return (
     <section className="w-full bg-[#f4f7f6] py-20 px-6">
       <div className="max-w-[1100px] mx-auto">
@@ -13,17 +39,21 @@ export default function ContactForm() {
           
           {/* Left: Form Card */}
           <div className="w-full lg:w-[60%] bg-white rounded-[24px] shadow-sm border border-gray-100 p-8 md:p-12">
-            <form className="flex flex-col gap-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <input 
                   type="text" 
                   placeholder="Name *" 
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
                   className="w-full border border-gray-200 rounded-[4px] p-4 text-sm text-gray-700 outline-none focus:border-[#8cc63f] transition-colors placeholder:text-gray-400"
                   required
                 />
                 <input 
                   type="email" 
                   placeholder="Email *" 
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
                   className="w-full border border-gray-200 rounded-[4px] p-4 text-sm text-gray-700 outline-none focus:border-[#8cc63f] transition-colors placeholder:text-gray-400"
                   required
                 />
@@ -31,14 +61,26 @@ export default function ContactForm() {
               <textarea 
                 placeholder="Message" 
                 rows={6}
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
                 className="w-full border border-gray-200 rounded-[4px] p-4 text-sm text-gray-700 outline-none focus:border-[#8cc63f] transition-colors resize-none placeholder:text-gray-400"
+                required
               ></textarea>
+              
+              {status === 'success' && (
+                <p className="text-[#8cc63f] text-sm text-center">Message sent successfully!</p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-500 text-sm text-center">Failed to send message. Please try again.</p>
+              )}
+
               <div className="flex justify-center mt-4">
                 <button 
                   type="submit" 
-                  className="bg-[#8cc63f] hover:bg-[#7ab133] text-white font-extrabold tracking-widest uppercase px-12 py-3.5 rounded-[4px] transition-colors text-[13px] shadow-sm"
+                  disabled={status === 'loading'}
+                  className="bg-[#8cc63f] hover:bg-[#7ab133] disabled:opacity-70 text-white font-extrabold tracking-widest uppercase px-12 py-3.5 rounded-[4px] transition-colors text-[13px] shadow-sm"
                 >
-                  SEND MESSAGE
+                  {status === 'loading' ? 'SENDING...' : 'SEND MESSAGE'}
                 </button>
               </div>
             </form>

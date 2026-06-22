@@ -12,8 +12,10 @@ export default function OurTeam() {
           { name: "Our Team" }
         ]} 
       />
-      <TeamSection />
-      <OurPortfolio />
+      <div id="content" className="w-full scroll-mt-16 md:scroll-mt-20">
+        <TeamSection />
+        <OurPortfolio />
+      </div>
     </main>
   );
 }

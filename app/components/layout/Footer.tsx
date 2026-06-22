@@ -1,8 +1,17 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <footer className="bg-[#093323] text-white pt-16 pb-8 relative mt-auto">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -42,9 +51,9 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-6">Quicklinks</h3>
             <ul className="space-y-4">
               {[
-                { name: 'Verticals & Portfolio', href: '/#verticals' },
-                { name: 'Knowledge Hub', href: '/knowledge-hub' },
-                { name: 'Our Team', href: '/our-team' }
+                { name: 'Verticals & Portfolio', href: '/vertical-portfolio#content' },
+                { name: 'Knowledge Hub', href: '/knowledge-hub#content' },
+                { name: 'Our Team', href: '/our-team#content' }
               ].map((link) => (
                 <li key={link.name} className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
                   <span className="text-[#9cc442] text-sm font-bold">&gt;</span>

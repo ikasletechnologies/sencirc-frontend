@@ -2,24 +2,24 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const portfolioItems = [
-  {
-    id: 'saf-one',
-    image: '/homepage/portfolio1.png',
-    title: 'SAF One',
-    description: 'Producer of pathway-agnostic Sustainable Aviation Fuel (SAF), a...',
-    link: '#',
-  },
-  {
-    id: 'zeste-energy',
-    image: '/homepage/portfolio2.png',
-    title: 'ZESTE Energy',
-    description: 'ZESTE Energy is managing Europe and UK\'s largest...',
-    link: '#',
-  }
-];
-
 export default function OurPortfolio() {
+  const portfolioItems = [
+    {
+      id: 'saf-one',
+      image: '/homepage/portfolio1.png',
+      title: 'SAF One',
+      description: 'Producer of pathway-agnostic Sustainable Aviation Fuel (SAF), a...',
+      link: '#',
+    },
+    {
+      id: 'zeste-energy',
+      image: '/homepage/portfolio2.png',
+      title: 'ZESTE Energy',
+      description: 'ZESTE Energy is managing Europe and UK\'s largest...',
+      link: '#',
+    }
+  ];
+
   return (
     <section className="py-24 px-6 max-w-[1200px] mx-auto font-sans bg-white">
       {/* Header Section */}
@@ -41,13 +41,17 @@ export default function OurPortfolio() {
           >
             {/* Logo side */}
             <div className="w-full md:w-1/2 flex items-center justify-center min-h-[120px] relative">
-              <Image 
-                src={item.image} 
-                alt={`${item.title} logo`} 
-                width={200} 
-                height={100} 
-                className="object-contain w-auto h-auto max-h-[80px]"
-              />
+              {item.image.startsWith('/') || item.image.startsWith('http') ? (
+                <Image 
+                  src={item.image} 
+                  alt={`${item.title} logo`} 
+                  width={200} 
+                  height={100} 
+                  className="object-contain w-auto h-auto max-h-[80px]"
+                />
+              ) : (
+                <div className="text-gray-400">No Image</div>
+              )}
             </div>
             
             {/* Content side */}
@@ -59,7 +63,7 @@ export default function OurPortfolio() {
                 {item.description}
               </p>
               <Link 
-                href={item.link} 
+                href={item.link || '#'} 
                 className="text-[#69c445] font-semibold text-[15px] hover:text-[#5ca35e] transition-colors inline-flex items-center justify-center md:justify-start"
               >
                 Visit Website

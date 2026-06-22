@@ -7,11 +7,13 @@ import OurPortfolio from "./components/Homepage/OurPortfolio";
 import ZesteEnergyFacility from "./components/Homepage/ZesteEnergyFacility";
 import PowerOfSencirc from "./components/Homepage/PowerOfSencirc";
 import CircularWasteCycle from "./components/Homepage/CircularWasteCycle";
+import PressReleases from "./components/Homepage/PressReleases";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-white">
       <HeroSection />
+      <PressReleases />
       <WhatDrivesUs />
       <WasteToValue />
       <PowerOfSencirc />

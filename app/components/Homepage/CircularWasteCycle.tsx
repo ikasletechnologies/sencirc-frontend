@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 const cycleData = [
@@ -52,36 +52,41 @@ function describeArc(x: number, y: number, innerRadius: number, outerRadius: num
   const startRad = (startAngle - 90) * Math.PI / 180;
   const endRad = (endAngle - 90) * Math.PI / 180;
 
-  const x1In = x + innerRadius * Math.cos(startRad);
-  const y1In = y + innerRadius * Math.sin(startRad);
-  const x1Out = x + outerRadius * Math.cos(startRad);
-  const y1Out = y + outerRadius * Math.sin(startRad);
+  const x1In = (x + innerRadius * Math.cos(startRad)).toFixed(4);
+  const y1In = (y + innerRadius * Math.sin(startRad)).toFixed(4);
+  const x1Out = (x + outerRadius * Math.cos(startRad)).toFixed(4);
+  const y1Out = (y + outerRadius * Math.sin(startRad)).toFixed(4);
 
-  const x2In = x + innerRadius * Math.cos(endRad);
-  const y2In = y + innerRadius * Math.sin(endRad);
-  const x2Out = x + outerRadius * Math.cos(endRad);
-  const y2Out = y + outerRadius * Math.sin(endRad);
+  const x2In = (x + innerRadius * Math.cos(endRad)).toFixed(4);
+  const y2In = (y + innerRadius * Math.sin(endRad)).toFixed(4);
+  const x2Out = (x + outerRadius * Math.cos(endRad)).toFixed(4);
+  const y2Out = (y + outerRadius * Math.sin(endRad)).toFixed(4);
 
   const largeArc = endAngle - startAngle > 180 ? 1 : 0;
 
-  return `
-    M ${x1In} ${y1In}
-    L ${x1Out} ${y1Out}
-    A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${x2Out} ${y2Out}
-    L ${x2In} ${y2In}
-    A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${x1In} ${y1In}
-    Z
-  `;
+  return `M ${x1In} ${y1In} L ${x1Out} ${y1Out} A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${x2Out} ${y2Out} L ${x2In} ${y2In} A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${x1In} ${y1In} Z`;
 }
 
 export default function CircularWasteCycle() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [rotation, setRotation] = useState(60);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % cycleData.length);
     setRotation((prev) => prev - 60);
-  };
+  }, []);
+
+  useEffect(() => {
+    if (isHovered) return;
+    
+    const intervalId = setInterval(() => {
+      nextSlide();
+    }, 4500); // Auto rotate every 4.5 seconds
+    
+    return () => clearInterval(intervalId);
+  }, [isHovered, nextSlide]);
+
   
   const prevSlide = () => {
     setActiveIndex((prev) => (prev - 1 + cycleData.length) % cycleData.length);
@@ -101,7 +106,11 @@ export default function CircularWasteCycle() {
   const activeItem = cycleData[activeIndex];
 
   return (
-    <section className="w-full bg-[#f9faf9] py-24 px-6 md:px-12 overflow-hidden">
+    <section 
+      className="w-full bg-[#f9faf9] py-24 px-6 md:px-12 overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="max-w-[1250px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-12">
         
         {/* Left: Circular Diagram */}
