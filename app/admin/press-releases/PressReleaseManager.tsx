@@ -21,7 +21,7 @@ export default function PressReleaseManager() {
     fetchItems();
   }, []);
 
-  const fetchItems = async () => {
+  async function fetchItems() {
     try {
       const response = await fetch('/api/press-releases');
       if (!response.ok) throw new Error('Failed to fetch press releases');

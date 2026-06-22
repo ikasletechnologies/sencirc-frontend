@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect,  useRef } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 const cycleData = [
@@ -69,38 +69,88 @@ function describeArc(x: number, y: number, innerRadius: number, outerRadius: num
 
 export default function CircularWasteCycle() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [rotation, setRotation] = useState(60);
   const [isHovered, setIsHovered] = useState(false);
+  const [isManualPause, setIsManualPause] = useState(false);
 
-  const nextSlide = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % cycleData.length);
-    setRotation((prev) => prev - 60);
-  }, []);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const rotationRef = useRef(60);
 
+  // Smooth continuous spin
   useEffect(() => {
-    if (isHovered) return;
-    
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 4500); // Auto rotate every 4.5 seconds
-    
-    return () => clearInterval(intervalId);
-  }, [isHovered, nextSlide]);
+    if (isHovered || isManualPause) return;
 
-  
+    let animationFrameId: number;
+    let lastTime = performance.now();
+
+    const animate = (time: number) => {
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      
+      // Speed: ~360 degrees in 40 seconds = 0.009 deg/ms
+      rotationRef.current -= 0.009 * deltaTime;
+      
+      if (wrapperRef.current) {
+        wrapperRef.current.style.transform = `rotate(${rotationRef.current}deg)`;
+        wrapperRef.current.style.transition = 'none'; // Ensure no CSS transition during rAF
+      }
+
+      // Determine the active slice based on current rotation
+      const normalizedRotation = ((60 - rotationRef.current) % 360 + 360) % 360;
+      const newIndex = Math.round(normalizedRotation / 60) % 6;
+      setActiveIndex(prev => prev !== newIndex ? newIndex : prev);
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isHovered, isManualPause]);
+
+  // Resume auto-spin after 5 seconds of no manual interaction
+  useEffect(() => {
+    if (isManualPause) {
+      const timeout = setTimeout(() => setIsManualPause(false), 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isManualPause]);
+
+  const smoothTransitionTo = (targetRotation: number) => {
+    rotationRef.current = targetRotation;
+    if (wrapperRef.current) {
+      wrapperRef.current.style.transition = 'transform 800ms ease-in-out';
+      wrapperRef.current.style.transform = `rotate(${targetRotation}deg)`;
+    }
+    
+    const normalizedRotation = ((60 - targetRotation) % 360 + 360) % 360;
+    const newIndex = Math.round(normalizedRotation / 60) % 6;
+    setActiveIndex(newIndex);
+  };
+
   const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + cycleData.length) % cycleData.length);
-    setRotation((prev) => prev + 60);
+    setIsManualPause(true);
+    const target = Math.round(rotationRef.current / 60) * 60 + 60;
+    smoothTransitionTo(target);
+  };
+
+  const nextSlide = () => {
+    setIsManualPause(true);
+    const target = Math.round(rotationRef.current / 60) * 60 - 60;
+    smoothTransitionTo(target);
   };
 
   const goToSlide = (i: number) => {
-    const diff = i - activeIndex;
-    let shortestDiff = diff;
-    if (diff > 3) shortestDiff -= 6;
-    if (diff < -3) shortestDiff += 6;
+    setIsManualPause(true);
     
-    setActiveIndex(i);
-    setRotation((prev) => prev - shortestDiff * 60);
+    const currentNorm = ((60 - rotationRef.current) % 360 + 360) % 360;
+    const targetNorm = i * 60;
+    
+    let diff = targetNorm - currentNorm;
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+    
+    const target = rotationRef.current - diff;
+    smoothTransitionTo(target);
   };
 
   const activeItem = cycleData[activeIndex];
@@ -118,8 +168,9 @@ export default function CircularWasteCycle() {
           
           {/* Rotating Wrapper */}
           <div 
-            className="w-full h-full transition-transform duration-[800ms] ease-in-out"
-            style={{ transform: `rotate(${rotation}deg)` }}
+            ref={wrapperRef}
+            className="w-full h-full"
+            style={{ transform: `rotate(60deg)` }}
           >
             <svg width="100%" height="100%" viewBox="0 0 500 500" className="overflow-visible">
               <defs>

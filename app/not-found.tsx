@@ -19,10 +19,10 @@ export default function NotFound() {
             404
           </h1>
           <h2 className="text-2xl md:text-3xl font-bold text-[#1f3f49] mb-4">
-            Looks like you're lost!
+            Looks like you&apos;re lost!
           </h2>
           <p className="text-gray-500 text-lg mb-12 leading-relaxed">
-            Oops! The page you are looking for doesn't exist, has been removed, or is temporarily unavailable. Let's get you back on track to building a sensible circular future.
+            Oops! The page you are looking for doesn&apos;t exist, has been removed, or is temporarily unavailable. Let&apos;s get you back on track to building a sensible circular future.
           </p>
           <Link 
             href="/" 

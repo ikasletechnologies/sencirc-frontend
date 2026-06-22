@@ -10,10 +10,8 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Return null if we are on an admin page
-  if (pathname?.startsWith('/admin')) {
-    return null;
-  }
+  // Early return moved after hooks
+  const isAdminPage = pathname?.startsWith('/admin');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +32,10 @@ export default function Header() {
     { name: 'OUR TEAM', href: '/our-team#content' },
     { name: 'CONTACT US', href: '/contact-us#content' },
   ];
+
+  if (isAdminPage) {
+    return null;
+  }
 
   return (
     <header className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'bg-white shadow-md' : 'bg-transparent'}`}>

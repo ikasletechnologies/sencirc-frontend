@@ -105,7 +105,7 @@ const CircleIcon = () => (
   </svg>
 );
 
-const AccordionItemComponent = ({ item, isOpen, onClick }: { item: any, isOpen: boolean, onClick: () => void }) => {
+const AccordionItemComponent = ({ item, isOpen, onClick }: { item: { title: string; bullets?: string[]; subcategories?: { title: string; bullets: string[] }[] }, isOpen: boolean, onClick: () => void }) => {
   return (
     <div className="mb-2">
       <button 
@@ -136,7 +136,7 @@ const AccordionItemComponent = ({ item, isOpen, onClick }: { item: any, isOpen: 
               </div>
             ))}
 
-            {item.subcategories && item.subcategories.map((sub: any, i: number) => (
+            {item.subcategories && item.subcategories.map((sub: { title: string; bullets: string[] }, i: number) => (
               <div key={i} className="flex flex-col gap-5">
                 <div className="flex items-start gap-5">
                   <TargetIcon />

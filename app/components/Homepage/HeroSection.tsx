@@ -11,8 +11,6 @@ export default function HeroSection() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    
     const type = () => {
       const currentWord = words[currentWordIndex];
       
@@ -43,7 +41,7 @@ export default function HeroSection() {
       delay = 500;
     }
 
-    timeout = setTimeout(type, delay);
+    const timeout = setTimeout(type, delay);
     return () => clearTimeout(timeout);
   }, [currentText, isDeleting, currentWordIndex]);
 

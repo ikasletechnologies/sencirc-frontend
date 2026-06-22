@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PageBanner from '@/app/components/layout/PageBanner';
 
@@ -40,7 +39,7 @@ export default async function PressReleasePage({
   }
 
   // Split description by newlines to render as separate paragraphs
-  const paragraphs = content?.split('\n').filter(p => p.trim() !== '') || [];
+  const paragraphs = content?.split('\n').filter((p: string) => p.trim() !== '') || [];
 
   return (
     <div className="bg-white min-h-screen">
@@ -68,7 +67,7 @@ export default async function PressReleasePage({
 
         {/* Content Section */}
         <div className="prose prose-lg max-w-none text-gray-600 space-y-6">
-          {paragraphs.map((paragraph, idx) => (
+          {paragraphs.map((paragraph: string, idx: number) => (
             <p key={idx} className="leading-relaxed text-[15px] md:text-[16px] text-[#1f3f49]/80">
               {paragraph}
             </p>

@@ -9,7 +9,7 @@ export default function WhatDrivesUs() {
       </h3>
       
       <h2 className="text-[#104b36] text-3xl md:text-4xl lg:text-[42px] font-bold mb-10 tracking-tight">
-        Turning Today's Waste To Tomorrow's Value
+        Turning Today&apos;s Waste To Tomorrow&apos;s Value
       </h2>
       
       <p className="text-[#104b36] font-bold text-base md:text-lg lg:text-[20px] leading-relaxed max-w-[1100px] mx-auto mb-2">

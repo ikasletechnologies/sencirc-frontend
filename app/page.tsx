@@ -1,4 +1,4 @@
-import TeamSection from "./components/Teamspage/TeamSection";
+// import TeamSection from "./components/Teamspage/TeamSection";
 import HeroSection from "./components/Homepage/HeroSection";
 import WhatDrivesUs from "./components/Homepage/WhatDrivesUs";
 import WasteToValue from "./components/Homepage/WasteToValue";

@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Column 3 */}
           <div className="md:col-span-4">
-            <h3 className="text-xl font-bold mb-6">Our Web Design Team's Story</h3>
+            <h3 className="text-xl font-bold mb-6">Our Web Design Team&apos;s Story</h3>
             <p className="text-sm text-gray-200 leading-relaxed">
               Ikaslé is a digital solutions company that partners with students and graduates to deliver real-world projects under expert guidance. Students earn fair compensation which support their education, help gain valuable experience, and become strong job market candidates.
             </p>
