@@ -4,12 +4,17 @@ import { prisma } from '@/lib/prisma';
 import { PressRelease } from '@prisma/client';
 
 export default async function PressReleases() {
-  // Fetch items from the database
-  let pressReleases: PressRelease[] = await prisma.pressRelease.findMany({
-    orderBy: { date: 'desc' },
-  });
+  // Fetch items from the database with error handling fallback
+  let pressReleases: PressRelease[] = [];
+  try {
+    pressReleases = await prisma.pressRelease.findMany({
+      orderBy: { date: 'desc' },
+    });
+  } catch (error) {
+    console.error('Failed to fetch press releases from database:', error);
+  }
 
-  // Fallback if database is empty (for demo purposes)
+  // Fallback if database is empty or unreachable (for demo purposes)
   if (pressReleases.length === 0) {
     pressReleases = [
       {

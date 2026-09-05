@@ -10,10 +10,15 @@ export default async function PressReleasePage({
   // Await the params due to Next.js 15+ requirements
   const { id } = await params;
 
-  // Fetch from the database
-  const item = await prisma.pressRelease.findUnique({
-    where: { id },
-  });
+  // Fetch from the database with error handling
+  let item = null;
+  try {
+    item = await prisma.pressRelease.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error('Failed to fetch press release by ID:', error);
+  }
 
   // Fallback if database is empty (for demo purposes)
   let title = item?.title;

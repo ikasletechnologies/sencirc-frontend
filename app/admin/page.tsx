@@ -3,8 +3,15 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
 export default async function AdminDashboard() {
-  const messagesCount = await prisma.contactMessage.count();
-  const portfolioCount = await prisma.portfolioItem.count();
+  let messagesCount = 0;
+  let portfolioCount = 0;
+
+  try {
+    messagesCount = await prisma.contactMessage.count();
+    portfolioCount = await prisma.portfolioItem.count();
+  } catch (error) {
+    console.error('Failed to fetch admin dashboard counts from database:', error);
+  }
 
   return (
     <div className="max-w-5xl mx-auto">

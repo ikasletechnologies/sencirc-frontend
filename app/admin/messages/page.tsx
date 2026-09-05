@@ -3,9 +3,14 @@ import { prisma } from '@/lib/prisma';
 import { ContactMessage } from '@prisma/client';
 
 export default async function AdminMessages() {
-  const messages: ContactMessage[] = await prisma.contactMessage.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
+  let messages: ContactMessage[] = [];
+  try {
+    messages = await prisma.contactMessage.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  } catch (error) {
+    console.error('Failed to fetch contact messages from database:', error);
+  }
 
   return (
     <div className="max-w-5xl mx-auto">
