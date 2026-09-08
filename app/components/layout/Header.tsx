@@ -54,14 +54,14 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex flex-1 items-center justify-end pr-8 pointer-events-none z-10">
+        {/* Desktop Navigation - centered across the full header width */}
+        <div className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none z-10">
           <nav className="flex items-center gap-5 xl:gap-10 pointer-events-auto">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href} 
-                className={`font-bold text-[13px] xl:text-sm tracking-wide transition-colors whitespace-nowrap ${isScrolled || isMobileMenuOpen ? 'text-[#104b36] hover:text-[#5ca35e]' : 'text-white hover:text-gray-200'}`}
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`font-bold text-[13px] xl:text-sm tracking-wide transition-colors whitespace-nowrap hover:text-[#8cc63f] ${isScrolled || isMobileMenuOpen ? 'text-[#104b36]' : 'text-white'}`}
               >
                 {link.name}
               </Link>

@@ -1,15 +1,15 @@
 import React from 'react';
-import { prisma } from '@/lib/prisma';
-import { ContactMessage } from '@prisma/client';
+import { API_URL, ContactMessage } from '@/lib/api';
 
 export default async function AdminMessages() {
   let messages: ContactMessage[] = [];
   try {
-    messages = await prisma.contactMessage.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+    const res = await fetch(`${API_URL}/api/messages`, { cache: 'no-store' });
+    if (res.ok) {
+      messages = await res.json();
+    }
   } catch (error) {
-    console.error('Failed to fetch contact messages from database:', error);
+    console.error('Failed to fetch contact messages from backend:', error);
   }
 
   return (
@@ -33,7 +33,7 @@ export default async function AdminMessages() {
               {messages.map((msg) => (
                 <tr key={msg.id} className="border-b border-gray-50 hover:bg-gray-50/50">
                   <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    {msg.createdAt.toLocaleDateString()}
+                    {new Date(msg.createdAt).toLocaleDateString()}
                   </td>
                   <td className="py-4 px-6 font-medium text-gray-800">{msg.name}</td>
                   <td className="py-4 px-6 text-gray-600">

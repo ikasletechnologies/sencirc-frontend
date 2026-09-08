@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { PressRelease } from '@prisma/client';
+import { API_URL, PressRelease } from '@/lib/api';
 
 export default function PressReleaseManager() {
   const [items, setItems] = useState<PressRelease[]>([]);
@@ -23,7 +23,7 @@ export default function PressReleaseManager() {
 
   async function fetchItems() {
     try {
-      const response = await fetch('/api/press-releases');
+      const response = await fetch(`${API_URL}/api/press-releases`);
       if (!response.ok) throw new Error('Failed to fetch press releases');
       const data = await response.json();
       setItems(data);
@@ -40,7 +40,7 @@ export default function PressReleaseManager() {
     setError(null);
 
     try {
-      const url = editingId ? `/api/press-releases/${editingId}` : '/api/press-releases';
+      const url = editingId ? `${API_URL}/api/press-releases/${editingId}` : `${API_URL}/api/press-releases`;
       const method = editingId ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -85,7 +85,7 @@ export default function PressReleaseManager() {
     if (!window.confirm('Are you sure you want to delete this press release?')) return;
 
     try {
-      const response = await fetch(`/api/press-releases/${id}`, {
+      const response = await fetch(`${API_URL}/api/press-releases/${id}`, {
         method: 'DELETE',
       });
 

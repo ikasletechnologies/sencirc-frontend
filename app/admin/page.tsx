@@ -1,16 +1,20 @@
 import React from 'react';
-import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import { API_URL } from '@/lib/api';
 
 export default async function AdminDashboard() {
   let messagesCount = 0;
   let portfolioCount = 0;
 
   try {
-    messagesCount = await prisma.contactMessage.count();
-    portfolioCount = await prisma.portfolioItem.count();
+    const res = await fetch(`${API_URL}/api/stats`, { cache: 'no-store' });
+    if (res.ok) {
+      const stats = await res.json();
+      messagesCount = stats.messagesCount;
+      portfolioCount = stats.portfolioCount;
+    }
   } catch (error) {
-    console.error('Failed to fetch admin dashboard counts from database:', error);
+    console.error('Failed to fetch admin dashboard counts from backend:', error);
   }
 
   return (

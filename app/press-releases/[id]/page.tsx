@@ -1,6 +1,6 @@
-import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import PageBanner from '@/app/components/layout/PageBanner';
+import { API_URL, PressRelease } from '@/lib/api';
 
 export default async function PressReleasePage({
   params,
@@ -10,12 +10,13 @@ export default async function PressReleasePage({
   // Await the params due to Next.js 15+ requirements
   const { id } = await params;
 
-  // Fetch from the database with error handling
-  let item = null;
+  // Fetch from the backend API with error handling
+  let item: PressRelease | null = null;
   try {
-    item = await prisma.pressRelease.findUnique({
-      where: { id },
-    });
+    const res = await fetch(`${API_URL}/api/press-releases/${id}`, { cache: 'no-store' });
+    if (res.ok) {
+      item = await res.json();
+    }
   } catch (error) {
     console.error('Failed to fetch press release by ID:', error);
   }
@@ -23,7 +24,7 @@ export default async function PressReleasePage({
   // Fallback if database is empty (for demo purposes)
   let title = item?.title;
   let content = item?.content;
-  let date = item?.date;
+  let date = item ? new Date(item.date) : undefined;
 
   if (!item) {
     if (id === 'dhl-saf-agreement') {

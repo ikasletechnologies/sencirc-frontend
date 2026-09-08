@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Phone } from 'lucide-react';
+import { API_URL } from '@/lib/api';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -11,7 +12,7 @@ export default function ContactForm() {
     setStatus('loading');
     
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

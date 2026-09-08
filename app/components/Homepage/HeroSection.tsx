@@ -13,7 +13,7 @@ export default function HeroSection() {
   useEffect(() => {
     const type = () => {
       const currentWord = words[currentWordIndex];
-      
+
       if (isDeleting) {
         setCurrentText(prev => prev.slice(0, -1));
         if (currentText === "") {
@@ -49,9 +49,9 @@ export default function HeroSection() {
     <section className="relative w-full h-screen flex items-center">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/homepage/herosection.jpg" 
-          alt="Sencirc Facility" 
+        <Image
+          src="/homepage/herosection.jpg"
+          alt="Sencirc Facility"
           fill
           priority
           className="object-cover object-center"
@@ -60,12 +60,12 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
       </div>
 
-      <div className="relative z-10 px-6 md:px-16 lg:px-24 w-full -translate-y-8">
-        <div className="inline-block bg-[#6fc238] text-white px-3 md:px-4 py-1.5 text-sm md:text-lg lg:text-xl font-bold uppercase tracking-wide mb-3 shadow-lg">
+      <div className="relative z-10 px-6 md:px-16 lg:px-24 w-full translate-x-[15%] -translate-y-[45%]">
+        <div className="inline-block bg-[#6fc238] text-white px-4 md:px-5 py-2 text-base md:text-xl lg:text-2xl font-bold uppercase tracking-wide mb-3 shadow-lg">
           We invest in, build, and own companies that convert
         </div>
-        
-        <h1 className="text-white text-5xl md:text-6xl lg:text-[70px] font-black tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] leading-tight flex items-center flex-wrap">
+
+        <h1 className="text-white text-6xl md:text-7xl lg:text-[90px] font-black tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] leading-tight flex items-center flex-wrap">
           Waste to&nbsp;<span className="text-[#6fc238]">{currentText}</span><span className="text-[#6fc238] animate-pulse font-light">|</span>
         </h1>
       </div>
