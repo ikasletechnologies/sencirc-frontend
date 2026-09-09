@@ -6,12 +6,12 @@ export default function WasteToValue() {
   return (
     <section className="w-full lg:w-[75%] pt-8 pb-8 px-4 md:px-8 max-w-[1920px] mx-auto text-center font-sans bg-white overflow-hidden mt-2 mb-8">
 
-      <h3 className="text-[#1f3f49] text-base sm:text-lg md:text-xl font-bold mb-8 mx-auto tracking-tight whitespace-nowrap">
+      <h3 className="text-[#1f3f49] text-sm sm:text-base md:text-xl font-bold mb-8 mx-auto tracking-tight text-center px-2">
         Waste To Value Conversion Can Be Achieved Through Various Technology And Process Pathways
       </h3>
 
       {/* Top Green Arrow */}
-      <div className="flex justify-center items-center mb-8 w-[65%] md:w-[60%] lg:w-[60%] xl:w-[35%] max-w-4xl mx-auto">
+      <div className="flex justify-center items-center mb-8 w-[85%] sm:w-[65%] md:w-[60%] lg:w-[60%] xl:w-[35%] max-w-4xl mx-auto">
         <div className="flex-1 h-[10px] bg-[#69c445] rounded-l-sm"></div>
         <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[26px] border-l-[#69c445] shrink-0"></div>
       </div>

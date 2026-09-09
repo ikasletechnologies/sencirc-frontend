@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/layout/Footer";
@@ -18,6 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sencirc | A Sensible Circular Future",
   description: "We invest in, build, and own companies that convert Waste to Energy, Fuels & Valuable Products.",
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#093323',
+  colorScheme: 'light',
 };
 
 export default function RootLayout({

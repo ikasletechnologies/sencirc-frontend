@@ -209,8 +209,8 @@ export default function CircularWasteCycle() {
       className="w-full bg-white pt-4 lg:pt-8 pb-24 px-6 md:px-12 overflow-hidden"
     >
       {/* Header Section */}
-      <div className="text-center mb-16 md:mb-24 w-full">
-        <h2 className="text-[#1f3f49] text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] leading-[1.4] font-bold w-full max-w-[1200px] mx-auto tracking-tight">
+      <div className="text-center mb-8 md:mb-16 lg:mb-24 w-full">
+        <h2 className="text-[#1f3f49] text-xl sm:text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] leading-[1.4] font-bold w-full max-w-[1200px] mx-auto tracking-tight">
           Sencirc Has Developed Innovative Ways To Solve Challenges In The<br className="hidden lg:block" /> Waste To Value Ecosystem.
         </h2>
       </div>
@@ -219,7 +219,7 @@ export default function CircularWasteCycle() {
         
         {/* Left: Circular Diagram */}
         <div 
-          className="relative w-full max-w-[600px] aspect-square flex-shrink-0"
+          className="relative w-full max-w-[340px] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[600px] aspect-square flex-shrink-0 mx-auto lg:mx-0"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

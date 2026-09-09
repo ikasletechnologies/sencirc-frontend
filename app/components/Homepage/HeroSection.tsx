@@ -46,7 +46,7 @@ export default function HeroSection() {
   }, [currentText, isDeleting, currentWordIndex]);
 
   return (
-    <section className="relative w-full h-screen flex items-center">
+    <section className="relative w-full h-screen min-h-[100svh] [min-height:100dvh] flex items-end">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -57,15 +57,15 @@ export default function HeroSection() {
           className="object-cover object-center"
         />
         {/* Subtle dark gradient to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
       </div>
 
-      <div className="relative z-10 px-6 md:px-16 lg:px-24 w-full translate-x-[15%] -translate-y-[45%]">
-        <div className="inline-block bg-[#6fc238] text-white px-4 md:px-5 py-2 text-base md:text-xl lg:text-2xl font-bold uppercase tracking-wide mb-3 shadow-lg">
+      <div className="relative z-10 px-6 md:px-16 lg:px-24 w-full pb-16 md:pb-24 lg:pb-28">
+        <div className="inline-block bg-[#6fc238] text-white px-4 md:px-5 py-2 text-sm md:text-xl lg:text-2xl font-bold uppercase tracking-wide mb-3 shadow-lg">
           We invest in, build, and own companies that convert
         </div>
 
-        <h1 className="text-white text-6xl md:text-7xl lg:text-[90px] font-black tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] leading-tight flex items-center flex-wrap">
+        <h1 className="text-white text-4xl sm:text-5xl md:text-7xl lg:text-[90px] font-black tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] leading-tight flex items-center flex-wrap">
           Waste to&nbsp;<span className="text-[#6fc238]">{currentText}</span><span className="text-[#6fc238] animate-pulse font-light">|</span>
         </h1>
       </div>

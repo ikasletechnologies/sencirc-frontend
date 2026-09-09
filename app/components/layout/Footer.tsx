@@ -13,9 +13,12 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-[#093323] text-white pt-16 pb-8 relative mt-auto">
+    <footer
+      className="bg-[#093323] text-white pt-10 md:pt-16 pb-8 relative mt-auto"
+      style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)' }}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16">
           {/* Column 1 */}
           <div className="md:col-span-5">
             <div className="bg-white rounded-2xl px-6 py-4 inline-flex items-center mb-6 shadow-sm">
@@ -51,9 +54,9 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-6">Quicklinks</h3>
             <ul className="space-y-4">
               {[
-                { name: 'Verticals & Portfolio', href: '/vertical-portfolio#content' },
-                { name: 'Knowledge Hub', href: '/knowledge-hub#content' },
-                { name: 'Our Team', href: '/our-team#content' }
+                { name: 'Verticals & Portfolio', href: '/vertical-portfolio' },
+                { name: 'Knowledge Hub', href: '/knowledge-hub' },
+                { name: 'Our Team', href: '/our-team' }
               ].map((link) => (
                 <li key={link.name} className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
                   <span className="text-[#9cc442] text-sm font-bold">&gt;</span>

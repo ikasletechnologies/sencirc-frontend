@@ -5,11 +5,11 @@ export default function PowerOfSencirc() {
   return (
     <section className="pt-8 pb-8 lg:pb-12 px-6 max-w-[1300px] mx-auto font-sans bg-white overflow-hidden">
       {/* Header Section */}
-      <div className="text-center mb-16 md:mb-20">
+      <div className="text-center mb-12 md:mb-20">
         <h3 className="text-[#72c23a] font-bold text-sm tracking-widest uppercase mb-4">
           POWER OF SENCIRC
         </h3>
-        <h2 className="text-[#1f3f49] text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] leading-[1.4] font-bold w-full max-w-[1200px] mx-auto tracking-tight">
+        <h2 className="text-[#1f3f49] text-xl sm:text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] leading-[1.4] font-bold w-full max-w-[1200px] mx-auto tracking-tight">
           We Form Sustainable Partnerships To Invest In, And Build Businesses<br className="hidden xl:block" />
           Turning Various Waste Streams Into Useful, Valuable Outputs.
         </h2>
@@ -27,7 +27,7 @@ export default function PowerOfSencirc() {
               </div>
               <h4 className="text-[#1f3f49] text-xl md:text-[22px] font-bold mt-4">Partner</h4>
             </div>
-            <div className="text-[80px] lg:text-[100px] font-black text-gray-100 leading-none -mt-4 transition-colors duration-300 group-hover:text-[#1f3f49]">
+            <div className="text-[60px] sm:text-[80px] lg:text-[100px] font-black text-gray-100 leading-none -mt-4 transition-colors duration-300 group-hover:text-[#1f3f49]">
               01.
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function PowerOfSencirc() {
               </div>
               <h4 className="text-[#1f3f49] text-xl md:text-[22px] font-bold mt-4">Invest</h4>
             </div>
-            <div className="text-[80px] lg:text-[100px] font-black text-gray-100 leading-none -mt-4 transition-colors duration-300 group-hover:text-[#1f3f49]">
+            <div className="text-[60px] sm:text-[80px] lg:text-[100px] font-black text-gray-100 leading-none -mt-4 transition-colors duration-300 group-hover:text-[#1f3f49]">
               02.
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function PowerOfSencirc() {
               </div>
               <h4 className="text-[#1f3f49] text-xl md:text-[22px] font-bold mt-4">Involve</h4>
             </div>
-            <div className="text-[80px] lg:text-[100px] font-black text-gray-100 leading-none -mt-4 transition-colors duration-300 group-hover:text-[#1f3f49]">
+            <div className="text-[60px] sm:text-[80px] lg:text-[100px] font-black text-gray-100 leading-none -mt-4 transition-colors duration-300 group-hover:text-[#1f3f49]">
               03.
             </div>
           </div>

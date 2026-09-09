@@ -32,7 +32,7 @@ export default function ContactForm() {
   return (
     <section className="w-full bg-[#f4f7f6] py-20 px-6">
       <div className="max-w-[1100px] mx-auto">
-        <h2 className="text-center text-[#69c445] text-[38px] font-bold mb-16 tracking-tight">
+        <h2 className="text-center text-[#69c445] text-2xl sm:text-[38px] font-bold mb-10 md:mb-16 tracking-tight">
           Get In Touch
         </h2>
         
@@ -47,7 +47,7 @@ export default function ContactForm() {
                   placeholder="Name *" 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full border border-gray-200 rounded-[4px] p-4 text-sm text-gray-700 outline-none focus:border-[#8cc63f] transition-colors placeholder:text-gray-400"
+                  className="w-full border border-gray-200 !rounded-[4px] p-4 text-gray-700 outline-none focus:border-[#8cc63f] transition-colors placeholder:text-gray-400"
                   required
                 />
                 <input 
@@ -55,7 +55,7 @@ export default function ContactForm() {
                   placeholder="Email *" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full border border-gray-200 rounded-[4px] p-4 text-sm text-gray-700 outline-none focus:border-[#8cc63f] transition-colors placeholder:text-gray-400"
+                  className="w-full border border-gray-200 !rounded-[4px] p-4 text-gray-700 outline-none focus:border-[#8cc63f] transition-colors placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -64,7 +64,7 @@ export default function ContactForm() {
                 rows={6}
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                className="w-full border border-gray-200 rounded-[4px] p-4 text-sm text-gray-700 outline-none focus:border-[#8cc63f] transition-colors resize-none placeholder:text-gray-400"
+                className="w-full border border-gray-200 !rounded-[4px] p-4 text-gray-700 outline-none focus:border-[#8cc63f] transition-colors resize-none placeholder:text-gray-400"
                 required
               ></textarea>
               
@@ -88,11 +88,15 @@ export default function ContactForm() {
           </div>
           
           {/* Right: Info Card */}
-          <div className="w-full lg:w-[35%] pl-4 md:pl-8">
-            <div className="relative bg-white rounded-[16px] shadow-sm border border-gray-100 p-10 flex flex-col items-center justify-center text-center min-h-[160px]">
-              {/* Floating Icon */}
-              <div className="absolute -top-10 -left-6 md:-left-10 w-[84px] h-[84px] bg-[#1f3f49] rounded-full flex items-center justify-center border-[8px] border-white shadow-[0_0_15px_rgba(0,0,0,0.08)]">
+          <div className="w-full lg:w-[35%] pl-0 lg:pl-4 md:pl-8">
+            <div className="relative bg-white rounded-[16px] shadow-sm border border-gray-100 p-8 flex flex-col items-center justify-center text-center min-h-[160px]">
+              {/* Floating Icon — only visible on lg+ */}
+              <div className="hidden lg:flex absolute -top-10 -left-10 w-[84px] h-[84px] bg-[#1f3f49] rounded-full items-center justify-center border-[8px] border-white shadow-[0_0_15px_rgba(0,0,0,0.08)]">
                 <Phone className="text-white" strokeWidth={1.5} size={28} />
+              </div>
+              {/* Inline icon for mobile/tablet */}
+              <div className="flex lg:hidden mb-4 w-[60px] h-[60px] bg-[#1f3f49] rounded-full items-center justify-center shadow-md">
+                <Phone className="text-white" strokeWidth={1.5} size={24} />
               </div>
               
               <h4 className="text-[#1f3f49] font-bold text-xl mb-3 tracking-wide">Phone Number</h4>

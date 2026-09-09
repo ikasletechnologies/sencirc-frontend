@@ -8,7 +8,7 @@ export default function WhatDrivesUs() {
         What Drives Us
       </h3>
 
-      <h2 className="text-[#104b36] text-3xl md:text-4xl lg:text-[42px] font-bold mb-16 tracking-tight">
+      <h2 className="text-[#104b36] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold mb-10 md:mb-16 tracking-tight">
         Turning Today&apos;s Waste To Tomorrow&apos;s Value
       </h2>
 

@@ -19,8 +19,66 @@
   }
 }
 
+html {
+  overflow-x: hidden;
+  /* Smooth momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent font size inflation on orientation change */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  /* Prevent elastic bounce on body on iOS */
+  overscroll-behavior-x: none;
+  /* Crisp text rendering on ProMotion (120Hz) displays */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* iOS safe area inset support for all Pro Max models */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+}
+
+/* Ensure tap targets are large enough on iOS (44×44px minimum) */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Prevent iOS input zoom (font-size must be >= 16px) */
+input, textarea, select {
+  font-size: 16px !important;
+  /* Remove iOS default styling */
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+/* Dynamic Viewport Height — supported on iOS 15.4+ (covers iPhone 15/16/17) */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
+/* iPhone Pro Max viewport range (430–444px) fine-tuning */
+@media screen and (min-width: 390px) and (max-width: 450px) {
+  /* Ensure no content bleeds at Pro Max widths */
+  section {
+    max-width: 100%;
+  }
+}
+

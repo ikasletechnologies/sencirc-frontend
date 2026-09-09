@@ -48,7 +48,7 @@ const efwData = [
   {
     title: "EFW Supports Circular Economy And Landfill Diversion",
     bullets: [
-      "EFW technologies convert non-recyclable municipal solid waste, biomass, sewage, etc. into power and different forms of energy, reducing landfill use and methane emissions.",
+      "EFW technologies convert non-recyclable municipal solid waste, biomass, sewage, etc. into power and different||TABS||industrial sectors.",
       "Depending on the technology pathway, outputs can include electricity, heat, steam, syngas, hydrogen, and other high value bioproducts, each with distinct commercial offtake markets in power, chemicals, transport, and industrial sectors."
     ]
   },
@@ -92,30 +92,59 @@ const rngData = [
   }
 ];
 
+const newsByTab: Record<string, { title: string; date: string }[]> = {
+  SAF: [
+    {
+      title: "DHL Express signs Bahrain SAF offtake-agreement with SAF One",
+      date: "May 12, 2026"
+    },
+    {
+      title: "Tata Projects Selected as EPC Partner for SAF One's Sustainable Aviation Fuel Project",
+      date: "January 20, 2026"
+    },
+    {
+      title: "Report: Global SAF Market To Reach $50 Billion by 2036",
+      date: "January 19, 2026"
+    }
+  ],
+  EFW: [
+    {
+      title: "Energy from waste to be included in UK Emissions Trading Scheme: What you need to know",
+      date: "May 21, 2025"
+    }
+  ],
+  RNG: [
+    {
+      title: "India's SATAT initiative accelerates Compressed Biogas (CBG) blending mandate",
+      date: "June 18, 2025"
+    }
+  ]
+};
+
 const TargetIcon = () => (
-  <svg className="w-[22px] h-[22px] text-[#69c445] shrink-0 mt-[2px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+  <svg className="w-[20px] h-[20px] text-[#69c445] shrink-0 mt-[3px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
     <circle cx="12" cy="12" r="8" />
     <circle cx="12" cy="12" r="3" fill="currentColor" />
   </svg>
 );
 
 const CircleIcon = () => (
-  <svg className="w-[18px] h-[18px] text-[#69c445] shrink-0 mt-[3px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+  <svg className="w-[16px] h-[16px] text-[#69c445] shrink-0 mt-[4px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
     <circle cx="12" cy="12" r="7" />
   </svg>
 );
 
-const AccordionItemComponent = ({ item, isOpen, onClick }: { item: { title: string; bullets?: string[]; subcategories?: { title: string; bullets: string[] }[] }, isOpen: boolean, onClick: () => void }) => {
+const AccordionItemComponent = ({ item, isOpen, onClick, activeTab, handleTabChange }: { item: { title: string; bullets?: string[]; subcategories?: { title: string; bullets: string[] }[] }, isOpen: boolean, onClick: () => void, activeTab?: string, handleTabChange?: (tab: string) => void }) => {
   return (
     <div className="mb-2">
       <button 
         onClick={onClick}
-        className="flex items-start gap-5 w-full text-left focus:outline-none group py-2"
+        className="flex items-start gap-4 w-full text-left focus:outline-none group py-2.5"
       >
         <div className="text-[#1f3f49] font-bold mt-0.5 shrink-0 transition-transform group-hover:scale-110">
-          {isOpen ? <Minus size={20} strokeWidth={3} /> : <Plus size={20} strokeWidth={3} />}
+          {isOpen ? <Minus size={18} strokeWidth={2.8} /> : <Plus size={18} strokeWidth={2.8} />}
         </div>
-        <h3 className={`text-[17px] font-bold capitalize leading-snug tracking-wide transition-colors ${isOpen ? 'text-[#69c445]' : 'text-[#1f3f49] group-hover:text-[#69c445]'}`}>
+        <h3 className="text-[16px] sm:text-[17px] font-bold capitalize leading-snug tracking-wide text-[#1f3f49] group-hover:text-[#69c445] transition-colors">
           {item.title}
         </h3>
       </button>
@@ -126,27 +155,55 @@ const AccordionItemComponent = ({ item, isOpen, onClick }: { item: { title: stri
         }`}
       >
         <div className="overflow-hidden">
-          <div className="pl-10 mt-4 mb-6 flex flex-col gap-6">
+          <div className="pl-8 sm:pl-10 mt-3 mb-6 flex flex-col gap-5 sm:gap-6">
             {item.bullets && item.bullets.map((bullet: string, i: number) => (
-              <div key={i} className="flex items-start gap-5">
+              <div key={i} className="flex items-start gap-4 sm:gap-5">
                 <TargetIcon />
-                <p className="text-gray-500 text-[15px] font-medium leading-[1.8]">
-                  {bullet}
-                </p>
+                <div className="text-gray-500 text-[14px] sm:text-[15px] font-medium leading-[1.8] w-full">
+                  {bullet.includes('||TABS||') ? (
+                    <>
+                      <p>{bullet.split('||TABS||')[0]}</p>
+                      
+                      {/* Centered Tabs Embedded within Text */}
+                      <div className="flex justify-center gap-3 md:gap-4 my-8 w-full">
+                        {['SAF', 'EFW', 'RNG'].map(tab => (
+                          <button 
+                            key={tab}
+                            onClick={(e) => { 
+                              e.stopPropagation(); 
+                              if (handleTabChange) handleTabChange(tab); 
+                            }}
+                            className={`px-6 sm:px-10 md:px-12 py-3 font-bold text-sm md:text-[15px] rounded-[4px] transition-all ${
+                              activeTab === tab 
+                                ? 'bg-[#69c445] text-white' 
+                                : 'bg-[#f4f7f6] text-[#1f3f49] hover:bg-[#e9eceb]'
+                            }`}
+                          >
+                            {tab}
+                          </button>
+                        ))}
+                      </div>
+
+                      <p>{bullet.split('||TABS||')[1]}</p>
+                    </>
+                  ) : (
+                    <p>{bullet}</p>
+                  )}
+                </div>
               </div>
             ))}
 
             {item.subcategories && item.subcategories.map((sub: { title: string; bullets: string[] }, i: number) => (
               <div key={i} className="flex flex-col gap-5">
-                <div className="flex items-start gap-5">
+                <div className="flex items-start gap-4 sm:gap-5">
                   <TargetIcon />
-                  <h4 className="text-gray-500 font-bold text-[15px] leading-[1.8]">{sub.title}</h4>
+                  <h4 className="text-gray-600 font-bold text-[14px] sm:text-[15px] leading-[1.8]">{sub.title}</h4>
                 </div>
-                <div className="pl-[42px] flex flex-col gap-5">
+                <div className="pl-8 sm:pl-[42px] flex flex-col gap-5">
                   {sub.bullets.map((bullet: string, j: number) => (
-                    <div key={j} className="flex items-start gap-4">
+                    <div key={j} className="flex items-start gap-3.5">
                       <CircleIcon />
-                      <p className="text-gray-500 text-[15px] font-medium leading-[1.8]">
+                      <p className="text-gray-500 text-[14px] sm:text-[15px] font-medium leading-[1.8]">
                         {bullet}
                       </p>
                     </div>
@@ -171,30 +228,34 @@ export default function FactsAndInsights() {
   };
 
   const currentData = activeTab === 'SAF' ? safData : activeTab === 'EFW' ? efwData : rngData;
+  const newsList = newsByTab[activeTab] || newsByTab['SAF'];
 
   return (
-    <section className="w-full bg-white py-24 px-6 md:px-12">
+    <section className="w-full bg-white py-12 md:py-16 px-6 md:px-12">
       <div className="max-w-[1000px] mx-auto">
         
-        {/* Sticky Tabs */}
-        <div className="sticky top-[64px] md:top-[80px] z-30 bg-white/95 backdrop-blur-sm py-4 mb-16 flex justify-center gap-3 md:gap-4 -mx-6 px-6 md:-mx-12 md:px-12 shadow-[0_8px_30px_-15px_rgba(0,0,0,0.08)]">
-          {['SAF', 'EFW', 'RNG'].map(tab => (
-            <button 
-              key={tab}
-              onClick={() => handleTabChange(tab)}
-              className={`px-8 md:px-12 py-3.5 font-bold text-[15px] md:text-[16px] tracking-wide rounded-[4px] transition-all shadow-sm ${
-                activeTab === tab 
-                  ? 'bg-[#69c445] text-white shadow-md scale-105' 
-                  : 'bg-[#f4f7f6] text-[#1f3f49] hover:bg-[#e9eceb]'
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        {/* Centered Tabs (Main) - Hidden when activeTab is EFW */}
+        {activeTab !== 'EFW' && (
+          <div className="flex justify-center gap-3 md:gap-4 mb-12 sm:mb-14">
+            {['SAF', 'EFW', 'RNG'].map(tab => (
+              <button 
+                key={tab}
+                onClick={() => handleTabChange(tab)}
+                className={`px-6 sm:px-10 md:px-12 py-3 font-bold text-sm md:text-[15px] tracking-wide rounded-[4px] transition-all shadow-sm ${
+                  activeTab === tab 
+                    ? 'bg-[#69c445] text-white shadow-md' 
+                    : 'bg-[#f4f7f6] text-[#1f3f49] hover:bg-[#e9eceb]'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        )}
 
-        <h2 className="text-center text-[#69c445] text-[34px] font-bold mb-16 tracking-tight">
-          Fact & Insights
+        {/* Section Heading */}
+        <h2 className="text-center text-[#69c445] text-2xl sm:text-[34px] font-bold mb-10 md:mb-12 tracking-tight">
+          Fact &amp; Insights
         </h2>
 
         {/* Accordion Container */}
@@ -205,10 +266,35 @@ export default function FactsAndInsights() {
               item={item} 
               isOpen={openIndex === idx} 
               onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
             />
           ))}
         </div>
-        
+
+        {/* Latest Industry News Section */}
+        <div className="mt-16 md:mt-24">
+          <h2 className="text-center text-[#69c445] text-2xl sm:text-[34px] font-bold mb-8 md:mb-10 tracking-tight">
+            Latest Industry News
+          </h2>
+          
+          <div className="flex flex-col gap-4 w-full">
+            {newsList.map((news, index) => (
+              <div 
+                key={index}
+                className="border border-gray-200/80 rounded-lg p-5 sm:p-7 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.02)] hover:border-gray-300 transition-colors"
+              >
+                <h3 className="text-[#1f3f49] font-bold text-base sm:text-[18px] leading-snug">
+                  {news.title}
+                </h3>
+                <p className="text-gray-400 text-xs sm:text-sm font-normal mt-2">
+                  {news.date}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
       </div>
     </section>
   );

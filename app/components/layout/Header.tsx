@@ -27,10 +27,10 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { name: 'VERTICALS & PORTFOLIO', href: '/vertical-portfolio#content' },
-    { name: 'KNOWLEDGE HUB', href: '/knowledge-hub#content' },
-    { name: 'OUR TEAM', href: '/our-team#content' },
-    { name: 'CONTACT US', href: '/contact-us#content' },
+    { name: 'VERTICALS & PORTFOLIO', href: '/vertical-portfolio' },
+    { name: 'KNOWLEDGE HUB', href: '/knowledge-hub' },
+    { name: 'OUR TEAM', href: '/our-team' },
+    { name: 'CONTACT US', href: '/contact-us' },
   ];
 
   if (isAdminPage) {
@@ -38,7 +38,10 @@ export default function Header() {
   }
 
   return (
-    <header className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <header
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'bg-white shadow-md' : 'bg-transparent'}`}
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
       <div className="flex items-center h-16 md:h-20 max-w-[1920px] mx-auto relative w-full">
         {/* Logo Section - Curve and shadow removed on scroll */}
         <div className={`h-full pl-6 md:pl-16 pr-8 md:pr-16 flex items-center z-20 relative transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'bg-transparent shadow-none rounded-none' : 'bg-white rounded-br-[40px] md:rounded-br-[80px] shadow-[4px_0_15px_-3px_rgba(0,0,0,0.1)]'}`}>

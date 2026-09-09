@@ -16,7 +16,10 @@ interface PageBannerProps {
 
 export default function PageBanner({ title, breadcrumbs, bgImage = "/breadcrumb/breadcrumb1.jpg" }: PageBannerProps) {
   return (
-    <div className="relative w-full h-[350px] md:h-[400px] flex flex-col justify-center pt-24 md:pt-28">
+    <div
+      className="relative w-full h-[350px] md:h-[400px] flex flex-col justify-center pt-24 md:pt-28"
+      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 6rem)' }}
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0 bg-black overflow-hidden">
         <Image 

@@ -32,11 +32,11 @@ export default function OurOffices() {
   return (
     <section className="w-full bg-white py-20 px-6 md:px-12">
       <div className="max-w-[1200px] mx-auto">
-        <h2 className="text-center text-[#69c445] text-[38px] font-bold mb-16 tracking-tight">
+        <h2 className="text-center text-[#69c445] text-2xl sm:text-[38px] font-bold mb-16 tracking-tight">
           Our Offices
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 pl-6 md:pl-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 pl-10 md:pl-8">
           {offices.map((office, index) => (
             <div key={index} className="relative rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-200 bg-white flex flex-col h-full">
               
