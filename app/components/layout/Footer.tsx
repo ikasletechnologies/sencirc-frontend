@@ -40,7 +40,7 @@ export default function Footer() {
             <div className="border-t border-white/20 pt-6 flex gap-12">
               <div>
                 <h4 className="text-[#9cc442] font-semibold mb-2">Get In Touch</h4>
-                <p className="text-white font-medium text-sm">+971 4 3332932</p>
+                <a href="tel:+97143332932" className="text-white font-medium text-sm hover:underline block">+971 4 3332932</a>
               </div>
               <div>
                 <h4 className="text-[#9cc442] font-semibold mb-2">Our Location</h4>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Handshake, TrendingUp, Users } from 'lucide-react';
 
 export default function PowerOfSencirc() {
@@ -23,7 +24,7 @@ export default function PowerOfSencirc() {
           <div className="flex flex-row items-start gap-4 lg:gap-6 mb-8">
             <div className="flex flex-col items-center">
               <div className="w-[100px] h-[100px] md:w-[110px] md:h-[110px] bg-[#f8f9fa] flex items-center justify-center rounded-md border border-gray-100">
-                <Handshake className="w-14 h-14 md:w-16 md:h-16 text-[#72c23a]" strokeWidth={1} />
+                <Image src="/homepage/partner.png" alt="Partner" width={90} height={90} className="object-contain" />
               </div>
               <h4 className="text-[#1f3f49] text-xl md:text-[22px] font-bold mt-4">Partner</h4>
             </div>
@@ -44,7 +45,7 @@ export default function PowerOfSencirc() {
           <div className="flex flex-row items-start gap-4 lg:gap-6 mb-8">
             <div className="flex flex-col items-center">
               <div className="w-[100px] h-[100px] md:w-[110px] md:h-[110px] bg-[#f8f9fa] flex items-center justify-center rounded-md border border-gray-100">
-                <TrendingUp className="w-14 h-14 md:w-16 md:h-16 text-[#72c23a]" strokeWidth={1} />
+                <Image src="/homepage/invest.webp" alt="Invest" width={90} height={90} className="object-contain" />
               </div>
               <h4 className="text-[#1f3f49] text-xl md:text-[22px] font-bold mt-4">Invest</h4>
             </div>
@@ -65,7 +66,7 @@ export default function PowerOfSencirc() {
           <div className="flex flex-row items-start gap-4 lg:gap-6 mb-8">
             <div className="flex flex-col items-center">
               <div className="w-[100px] h-[100px] md:w-[110px] md:h-[110px] bg-[#f8f9fa] flex items-center justify-center rounded-md border border-gray-100">
-                <Users className="w-14 h-14 md:w-16 md:h-16 text-[#72c23a]" strokeWidth={1} />
+             <Image src="/homepage/involve.webp" alt="Invest" width={90} height={90} className="object-contain" />
               </div>
               <h4 className="text-[#1f3f49] text-xl md:text-[22px] font-bold mt-4">Involve</h4>
             </div>

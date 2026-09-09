@@ -321,7 +321,7 @@ export default function CircularWasteCycle() {
 
         {/* Right: Content Card */}
         <div className="flex-1 w-full max-w-xl">
-          <div className="bg-white rounded-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-7 md:p-9 relative border-[2px] border-gray-100">
+          <div className="bg-white rounded-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-7 md:p-9 relative border border-black/20">
             <h3 className="text-[#69c445] text-[22px] font-bold mb-3 tracking-tight">
               {activeItem.title}
             </h3>

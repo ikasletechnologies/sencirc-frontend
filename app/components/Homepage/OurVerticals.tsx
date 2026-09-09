@@ -51,15 +51,16 @@ export default function OurVerticals() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="py-20 px-4 md:px-6 max-w-[1200px] mx-auto font-sans bg-[#f7f9f8] overflow-hidden">
-      <div className="text-center mb-16">
-        <h3 className="text-[#5ca35e] font-bold text-sm tracking-widest uppercase mb-4">
-          OUR VERTICALS
-        </h3>
-        <h2 className="text-[#1f3f49] text-2xl md:text-3xl lg:text-[34px] font-bold tracking-tight">
-          Sencirc Currently Operates Across Three Business Verticals
-        </h2>
-      </div>
+    <section className="relative py-20 font-sans overflow-hidden w-full bg-[#f7f9f8]">
+      <div className="relative z-10 px-4 md:px-6 max-w-[1200px] mx-auto">
+        <div className="text-center mb-16 relative">
+          <h3 className="text-[#5ca35e] font-bold text-sm tracking-widest uppercase mb-4">
+            OUR VERTICALS
+          </h3>
+          <h2 className="text-[#1f3f49] text-2xl md:text-3xl lg:text-[34px] font-bold tracking-tight">
+            Sencirc Currently Operates Across Three Business Verticals
+          </h2>
+        </div>
 
       {/* ── Mobile layout (< md): simple tab selector + card ── */}
       <div className="md:hidden">
@@ -169,6 +170,7 @@ export default function OurVerticals() {
             })}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

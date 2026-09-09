@@ -48,8 +48,8 @@ const efwData = [
   {
     title: "EFW Supports Circular Economy And Landfill Diversion",
     bullets: [
-      "EFW technologies convert non-recyclable municipal solid waste, biomass, sewage, etc. into power and different||TABS||industrial sectors.",
-      "Depending on the technology pathway, outputs can include electricity, heat, steam, syngas, hydrogen, and other high value bioproducts, each with distinct commercial offtake markets in power, chemicals, transport, and industrial sectors."
+      "EFW technologies convert non-recyclable municipal solid waste, biomass, sewage, etc. into power and different industrial sectors.",
+      "EFW is a long-standing process globally that solves two main issues: reducing the amount of waste sent to landfills and generating energy."
     ]
   },
   {
@@ -134,7 +134,7 @@ const CircleIcon = () => (
   </svg>
 );
 
-const AccordionItemComponent = ({ item, isOpen, onClick, activeTab, handleTabChange }: { item: { title: string; bullets?: string[]; subcategories?: { title: string; bullets: string[] }[] }, isOpen: boolean, onClick: () => void, activeTab?: string, handleTabChange?: (tab: string) => void }) => {
+const AccordionItemComponent = ({ item, isOpen, onClick }: { item: { title: string; bullets?: string[]; subcategories?: { title: string; bullets: string[] }[] }, isOpen: boolean, onClick: () => void }) => {
   return (
     <div className="mb-2">
       <button 
@@ -160,35 +160,7 @@ const AccordionItemComponent = ({ item, isOpen, onClick, activeTab, handleTabCha
               <div key={i} className="flex items-start gap-4 sm:gap-5">
                 <TargetIcon />
                 <div className="text-gray-500 text-[14px] sm:text-[15px] font-medium leading-[1.8] w-full">
-                  {bullet.includes('||TABS||') ? (
-                    <>
-                      <p>{bullet.split('||TABS||')[0]}</p>
-                      
-                      {/* Centered Tabs Embedded within Text */}
-                      <div className="flex justify-center gap-3 md:gap-4 my-8 w-full">
-                        {['SAF', 'EFW', 'RNG'].map(tab => (
-                          <button 
-                            key={tab}
-                            onClick={(e) => { 
-                              e.stopPropagation(); 
-                              if (handleTabChange) handleTabChange(tab); 
-                            }}
-                            className={`px-6 sm:px-10 md:px-12 py-3 font-bold text-sm md:text-[15px] rounded-[4px] transition-all ${
-                              activeTab === tab 
-                                ? 'bg-[#69c445] text-white' 
-                                : 'bg-[#f4f7f6] text-[#1f3f49] hover:bg-[#e9eceb]'
-                            }`}
-                          >
-                            {tab}
-                          </button>
-                        ))}
-                      </div>
-
-                      <p>{bullet.split('||TABS||')[1]}</p>
-                    </>
-                  ) : (
-                    <p>{bullet}</p>
-                  )}
+                  <p>{bullet}</p>
                 </div>
               </div>
             ))}
@@ -234,24 +206,22 @@ export default function FactsAndInsights() {
     <section className="w-full bg-white py-12 md:py-16 px-6 md:px-12">
       <div className="max-w-[1000px] mx-auto">
         
-        {/* Centered Tabs (Main) - Hidden when activeTab is EFW */}
-        {activeTab !== 'EFW' && (
-          <div className="flex justify-center gap-3 md:gap-4 mb-12 sm:mb-14">
-            {['SAF', 'EFW', 'RNG'].map(tab => (
-              <button 
-                key={tab}
-                onClick={() => handleTabChange(tab)}
-                className={`px-6 sm:px-10 md:px-12 py-3 font-bold text-sm md:text-[15px] tracking-wide rounded-[4px] transition-all shadow-sm ${
-                  activeTab === tab 
-                    ? 'bg-[#69c445] text-white shadow-md' 
-                    : 'bg-[#f4f7f6] text-[#1f3f49] hover:bg-[#e9eceb]'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Centered Tabs (Main) */}
+        <div className="flex justify-center gap-3 md:gap-4 mb-12 sm:mb-14">
+          {['SAF', 'EFW', 'RNG'].map(tab => (
+            <button 
+              key={tab}
+              onClick={() => handleTabChange(tab)}
+              className={`px-6 sm:px-10 md:px-12 py-3 font-bold text-sm md:text-[15px] tracking-wide rounded-[4px] transition-all shadow-sm ${
+                activeTab === tab 
+                  ? 'bg-[#69c445] text-white shadow-md' 
+                  : 'bg-[#f4f7f6] text-[#1f3f49] hover:bg-[#e9eceb]'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
         {/* Section Heading */}
         <h2 className="text-center text-[#69c445] text-2xl sm:text-[34px] font-bold mb-10 md:mb-12 tracking-tight">
@@ -262,12 +232,10 @@ export default function FactsAndInsights() {
         <div className="flex flex-col gap-1">
           {currentData.map((item, idx) => (
             <AccordionItemComponent 
-              key={`${activeTab}-${idx}`} 
+              key={idx} 
               item={item} 
               isOpen={openIndex === idx} 
               onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-              activeTab={activeTab}
-              handleTabChange={handleTabChange}
             />
           ))}
         </div>

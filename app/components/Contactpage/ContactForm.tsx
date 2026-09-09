@@ -100,7 +100,7 @@ export default function ContactForm() {
               </div>
               
               <h4 className="text-[#1f3f49] font-bold text-xl mb-3 tracking-wide">Phone Number</h4>
-              <p className="text-[#8cc63f] font-semibold text-lg tracking-wide">+971 4 3332932</p>
+              <a href="tel:+97143332932" className="text-[#8cc63f] font-semibold text-lg tracking-wide hover:underline">+971 4 3332932</a>
             </div>
           </div>
           

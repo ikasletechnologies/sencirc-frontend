@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { CheckCircle2, Lightbulb, Users, Banknote, FileText } from 'lucide-react';
+import { CheckCircle2, Lightbulb, Users, Banknote, FileText, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 type TabType = 'saf' | 'efw' | 'rng';
@@ -24,13 +24,14 @@ const verticalsData = {
       name: 'SAF One',
       description: "SAF One is a joint venture between Sencirc and Novus Aviation Capital, one of the world's leading aviation leasing and finance firms.",
       logo: '/homepage/portfolio1.png',
+      subLogo: '/logo.webp',
       buttonText: 'Visit SAF One',
       buttonLink: '#'
     },
     partnershipText: 'The Sencirc – Novus Partnership Enables Pursuit Of Global SAF Project Development And Execution By Providing SAF One With',
     pillars: [
       { num: '01', title: 'Asset Management & Domain Expertise', icon: Lightbulb },
-      { num: '02', title: 'Industry Access', icon: Users },
+      { num: '02', title: 'Industry Access', icon: (props: any) => <Image src="/homepage/partner.png" alt="Partner" width={65} height={65} className="object-contain" /> },
       { num: '03', title: 'Institutional Capital', icon: Banknote }
     ],
     footerText: 'SAF One, As A Platform, Works With Stakeholders Across The Value Chain To Take Projects From Planning To Fuel Production.'
@@ -50,6 +51,7 @@ const verticalsData = {
       name: 'ZESTE ENERGY',
       description: "ZESTE is a joint venture between Sencirc and The Brooking Plant - a leader in the EfW space, bringing in decades of experience in the development and completion of Energy from Waste projects and platforms.",
       logo: '/homepage/portfolio2.png',
+      subLogo: undefined,
       buttonText: 'Visit ZESTE Energy',
       buttonLink: '#'
     },
@@ -117,13 +119,46 @@ export default function VerticalTabs() {
         </p>
         
         {/* Process Diagram Placeholder */}
-        <div className="w-full max-w-2xl mx-auto flex items-center justify-center mb-8">
+        <div className="w-full max-w-2xl mx-auto flex items-center justify-center mb-5">
           {activeTab === 'saf' ? (
-             <img src="/homepage/process-diagram-saf.png" alt="SAF Process Flow" className="w-full h-auto object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
-          ) : null}
-          <div className={`w-full h-[200px] flex items-center justify-center ${activeTab === 'saf' ? 'hidden' : ''}`}>
-             <p className="text-gray-400 font-medium">Process Flow Image goes here ({activeTab.toUpperCase()})</p>
-          </div>
+             <div className="flex items-start gap-6 -translate-x-10">
+               <div className="flex flex-col items-center gap-3">
+                 <img src="/new/s1.png" alt="SAF Process Flow 1" className="w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">Waste</span>
+               </div>
+               
+               <div className="flex items-center justify-center h-[100px]">
+                 <ArrowRight className="text-[#6fc238] w-6 h-6 md:w-8 md:h-8" />
+               </div>
+
+               <div className="flex flex-col items-center gap-3">
+                 <img src="/new/s2.png" alt="SAF Process Flow 2" className="w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">Conversion</span>
+               </div>
+
+               <div className="flex items-center justify-center h-[100px]">
+                 <ArrowRight className="text-[#6fc238] w-6 h-6 md:w-8 md:h-8" />
+               </div>
+
+               <div className="flex flex-col items-center gap-3">
+                 <img src="/new/s3.png" alt="SAF Process Flow 3" className="w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">Upgrading</span>
+               </div>
+
+               <div className="flex items-center justify-center h-[100px]">
+                 <ArrowRight className="text-[#6fc238] w-6 h-6 md:w-8 md:h-8" />
+               </div>
+
+               <div className="flex flex-col items-center gap-3">
+                 <img src="/new/s4.png" alt="SAF Process Flow 4" className="w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">SAF</span>
+               </div>
+             </div>
+          ) : (
+            <div className="w-[30px] h-[30px] flex items-center justify-center">
+               <p className="text-gray-400 font-medium">Process Flow Image goes here ({activeTab.toUpperCase()})</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -154,7 +189,7 @@ export default function VerticalTabs() {
                 {activeData.portfolioCompany.description}
               </p>
             </div>
-            <div className="w-full md:w-1/2 flex justify-center">
+            <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-6">
               <Image 
                 src={activeData.portfolioCompany.logo} 
                 alt={activeData.portfolioCompany.name} 
@@ -162,6 +197,15 @@ export default function VerticalTabs() {
                 height={120} 
                 className="object-contain"
               />
+              {activeData.portfolioCompany.subLogo && (
+                <Image 
+                  src={activeData.portfolioCompany.subLogo} 
+                  alt="Partner Logo" 
+                  width={100} 
+                  height={50} 
+                  className="object-contain opacity-90 -translate-x-24"
+                />
+              )}
             </div>
           </div>
           <div className="flex justify-center">
@@ -185,12 +229,12 @@ export default function VerticalTabs() {
             {activeData.pillars.map((pillar, idx) => {
               const Icon = pillar.icon;
               return (
-                <div key={idx} className="flex flex-col items-center">
+                <div key={idx} className="flex flex-col items-center group cursor-pointer">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <div className="w-20 h-20 rounded-md flex items-center justify-center bg-[#f0f4ef]">
                       <Icon className="text-[#69c445] w-10 h-10" strokeWidth={1.5} />
                     </div>
-                    <span className="text-[80px] font-bold text-[#f0f4ef] select-none leading-none tracking-tighter">
+                    <span className="text-[80px] font-bold text-[#f0f4ef] group-hover:text-[#1f3f49] transition-colors duration-300 select-none leading-none tracking-tighter">
                       {pillar.num}
                     </span>
                   </div>
