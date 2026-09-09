@@ -111,52 +111,52 @@ export default function VerticalTabs() {
 
       {/* Main Content Card */}
       <div className="bg-[#f9faf9] rounded-b-xl p-8 md:p-12 mb-8 shadow-sm w-full max-w-4xl mx-auto">
-        <h3 className="text-center text-[#1f3f49] text-2xl font-bold mb-4">
+        <h3 className="text-center text-[#1f3f49] text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
           {activeData.title}
         </h3>
-        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-[15px]">
+        <p className="text-center text-gray-600 mb-8 md:mb-12 max-w-3xl mx-auto text-sm sm:text-[15px] md:text-base px-2">
           {activeData.description}
         </p>
         
         {/* Process Diagram Placeholder */}
-        <div className="w-full max-w-2xl mx-auto flex items-center justify-center mb-5">
+        <div className="w-full max-w-3xl mx-auto flex items-center justify-center mb-5 px-2">
           {activeTab === 'saf' ? (
-             <div className="flex items-start gap-6 -translate-x-10">
-               <div className="flex flex-col items-center gap-3">
-                 <img src="/new/s1.png" alt="SAF Process Flow 1" className="w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">Waste</span>
+             <div className="flex items-start justify-center md:justify-start gap-2 sm:gap-4 md:gap-6 md:-translate-x-10 w-full overflow-hidden">
+               <div className="flex flex-col items-center gap-1 md:gap-3">
+                 <img src="/new/s1.png" alt="SAF Process Flow 1" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">Waste</span>
                </div>
                
-               <div className="flex items-center justify-center h-[100px]">
-                 <ArrowRight className="text-[#6fc238] w-6 h-6 md:w-8 md:h-8" />
+               <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
+                 <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
                </div>
 
-               <div className="flex flex-col items-center gap-3">
-                 <img src="/new/s2.png" alt="SAF Process Flow 2" className="w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">Conversion</span>
+               <div className="flex flex-col items-center gap-1 md:gap-3">
+                 <img src="/new/s2.png" alt="SAF Process Flow 2" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">Conversion</span>
                </div>
 
-               <div className="flex items-center justify-center h-[100px]">
-                 <ArrowRight className="text-[#6fc238] w-6 h-6 md:w-8 md:h-8" />
+               <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
+                 <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
                </div>
 
-               <div className="flex flex-col items-center gap-3">
-                 <img src="/new/s3.png" alt="SAF Process Flow 3" className="w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">Upgrading</span>
+               <div className="flex flex-col items-center gap-1 md:gap-3">
+                 <img src="/new/s3.png" alt="SAF Process Flow 3" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">Upgrading</span>
                </div>
 
-               <div className="flex items-center justify-center h-[100px]">
-                 <ArrowRight className="text-[#6fc238] w-6 h-6 md:w-8 md:h-8" />
+               <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
+                 <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
                </div>
 
-               <div className="flex flex-col items-center gap-3">
-                 <img src="/new/s4.png" alt="SAF Process Flow 4" className="w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[13px] md:text-[15px] font-bold text-[#1f3f49]">SAF</span>
+               <div className="flex flex-col items-center gap-1 md:gap-3">
+                 <img src="/new/s4.png" alt="SAF Process Flow 4" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
+                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">SAF</span>
                </div>
              </div>
           ) : (
-            <div className="w-[30px] h-[30px] flex items-center justify-center">
-               <p className="text-gray-400 font-medium">Process Flow Image goes here ({activeTab.toUpperCase()})</p>
+            <div className="w-full flex items-center justify-center py-6">
+               <p className="text-gray-400 font-medium text-center text-sm sm:text-base px-4">Process Flow Image goes here ({activeTab.toUpperCase()})</p>
             </div>
           )}
         </div>

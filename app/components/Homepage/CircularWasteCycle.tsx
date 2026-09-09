@@ -281,7 +281,7 @@ export default function CircularWasteCycle() {
                         <text
                           key={i}
                           y={(i - (item.titleLines.length - 1) / 2) * lineHeight}
-                          fontSize={14}
+                          fontSize={12}
                           textAnchor="middle"
                           alignmentBaseline="middle"
                           fill="white"
@@ -298,21 +298,21 @@ export default function CircularWasteCycle() {
           </div>
 
           {/* Inner Core Circle (Static Overlay) */}
-          <div className="absolute inset-0 m-auto w-[190px] h-[190px] bg-white rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.08)] flex items-center justify-center pointer-events-none z-10 border-[1.5px] border-gray-400/70">
-            <div className="flex items-center gap-3">
-              <span className="font-black text-[#1f3f49] text-[26px] tracking-tight">Waste</span>
-              <div className="flex flex-col justify-center gap-2">
-                <div className="flex items-center gap-1.5">
-                  <ArrowUpRight size={16} className="text-[#69c445]" strokeWidth={3}/>
-                  <span className="text-[#1f3f49] font-semibold text-[14px] tracking-wide">SAF</span>
+          <div className="absolute inset-0 m-auto w-[38%] h-[38%] bg-white rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.08)] flex items-center justify-center pointer-events-none z-10 border-[1.5px] border-gray-400/70">
+            <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+              <span className="font-black text-[#1f3f49] text-[16px] sm:text-[20px] md:text-[26px] tracking-tight">Waste</span>
+              <div className="flex flex-col justify-center gap-0.5 sm:gap-1 md:gap-2">
+                <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
+                  <ArrowUpRight className="text-[#69c445] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" strokeWidth={3}/>
+                  <span className="text-[#1f3f49] font-semibold text-[9px] sm:text-[11px] md:text-[14px] tracking-wide">SAF</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <ArrowRight size={16} className="text-[#69c445]" strokeWidth={3}/>
-                  <span className="text-[#1f3f49] font-semibold text-[14px] tracking-wide">EFW</span>
+                <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
+                  <ArrowRight className="text-[#69c445] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" strokeWidth={3}/>
+                  <span className="text-[#1f3f49] font-semibold text-[9px] sm:text-[11px] md:text-[14px] tracking-wide">EFW</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <ArrowDownRight size={16} className="text-[#69c445]" strokeWidth={3}/>
-                  <span className="text-[#1f3f49] font-semibold text-[14px] tracking-wide">RNG</span>
+                <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
+                  <ArrowDownRight className="text-[#69c445] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" strokeWidth={3}/>
+                  <span className="text-[#1f3f49] font-semibold text-[9px] sm:text-[11px] md:text-[14px] tracking-wide">RNG</span>
                 </div>
               </div>
             </div>
