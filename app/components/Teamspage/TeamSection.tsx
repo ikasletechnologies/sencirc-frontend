@@ -20,7 +20,7 @@ const teamData = [
     name: "Mohamed Nazim",
     role: "Manager",
     description: null,
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/mdnazim/",
     image: "/teamsection/team3.png",
     layout: 'vertical'
   }

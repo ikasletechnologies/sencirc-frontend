@@ -13,6 +13,12 @@ const verticalsData = {
     label: 'SAF',
     title: 'Sustainable Aviation Fuel (SAF)',
     description: 'SAF is a renewable alternative to conventional jet fuel, produced from waste-based inputs.',
+    processFlow: [
+      { img: '/new/s1.png', label: 'Waste' },
+      { img: '/new/s2.png', label: 'Conversion' },
+      { img: '/new/s3.png', label: 'Upgrading' },
+      { img: '/new/s4.png', label: 'SAF' }
+    ],
     problemTitle: 'The Problem SAF Solves for the Aviation Industry',
     problemPoints: [
       'Aviation makes up around 2-3% of global CO2 emissions. SAF can cut these emissions by up to 80% over its lifecycle.',
@@ -41,6 +47,11 @@ const verticalsData = {
     label: 'EFW',
     title: 'Energy From Waste (EFW)',
     description: 'A sustainable form of energy generated as electricity, heat, or other forms of energy through the processing of non-recyclable waste.',
+    processFlow: [
+      { img: '/new/s5.png', label: 'Municipal Solid Waste' },
+      { img: '/new/s6.png', label: 'Gasification' },
+      { img: '/new/s7.png', label: 'Energy (EFW)' }
+    ],
     problemTitle: 'The Problem EFW Solves',
     problemPoints: [
       "EfW (Energy from Waste) technologies handle waste that can't be reused or recycled and would otherwise end up in landfills.",
@@ -68,6 +79,12 @@ const verticalsData = {
     label: 'RNG',
     title: 'Renewable Natural Gas (RNG)',
     description: 'A sustainable, methane-rich gas produced from anaerobic decomposition of biogenic wastes.',
+    processFlow: [
+      { img: '/new/s8.png', label: 'Organic Waste' },
+      { img: '/new/s9.png', label: 'Anaerobic Digestion' },
+      { img: '/new/s10.png', label: 'Purification' },
+      { img: '/new/s11.png', label: 'RNG (CBG)' }
+    ],
     problemTitle: 'The Problem RNG Solves',
     problemPoints: [
       'Promotes the circular future that we inspire the planet to move to.',
@@ -118,47 +135,23 @@ export default function VerticalTabs() {
           {activeData.description}
         </p>
         
-        {/* Process Diagram Placeholder */}
+        {/* Process Diagram */}
         <div className="w-full max-w-3xl mx-auto flex items-center justify-center mb-5 px-2">
-          {activeTab === 'saf' ? (
-             <div className="flex items-start justify-center md:justify-start gap-2 sm:gap-4 md:gap-6 md:-translate-x-10 w-full overflow-hidden">
-               <div className="flex flex-col items-center gap-1 md:gap-3">
-                 <img src="/new/s1.png" alt="SAF Process Flow 1" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">Waste</span>
-               </div>
-               
-               <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
-                 <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
-               </div>
-
-               <div className="flex flex-col items-center gap-1 md:gap-3">
-                 <img src="/new/s2.png" alt="SAF Process Flow 2" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">Conversion</span>
-               </div>
-
-               <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
-                 <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
-               </div>
-
-               <div className="flex flex-col items-center gap-1 md:gap-3">
-                 <img src="/new/s3.png" alt="SAF Process Flow 3" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">Upgrading</span>
-               </div>
-
-               <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
-                 <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
-               </div>
-
-               <div className="flex flex-col items-center gap-1 md:gap-3">
-                 <img src="/new/s4.png" alt="SAF Process Flow 4" className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
-                 <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49]">SAF</span>
-               </div>
-             </div>
-          ) : (
-            <div className="w-full flex items-center justify-center py-6">
-               <p className="text-gray-400 font-medium text-center text-sm sm:text-base px-4">Process Flow Image goes here ({activeTab.toUpperCase()})</p>
-            </div>
-          )}
+          <div className="flex items-start justify-center gap-2 sm:gap-4 md:gap-6 w-full overflow-hidden">
+            {activeData.processFlow.map((step, idx) => (
+              <React.Fragment key={idx}>
+                {idx > 0 && (
+                  <div className="flex items-center justify-center h-[14vw] sm:h-[12vw] md:h-[100px]">
+                    <ArrowRight className="text-[#6fc238] w-4 h-4 md:w-8 md:h-8 shrink-0" />
+                  </div>
+                )}
+                <div className="flex flex-col items-center gap-1 md:gap-3">
+                  <img src={step.img} alt={`${activeData.label} Process Flow - ${step.label}`} className="w-[14vw] sm:w-[12vw] md:w-full max-w-[100px] h-auto object-contain" />
+                  <span className="text-[10px] sm:text-[12px] md:text-[15px] font-bold text-[#1f3f49] text-center">{step.label}</span>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </div>
 
