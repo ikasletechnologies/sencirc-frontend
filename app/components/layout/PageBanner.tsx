@@ -9,54 +9,58 @@ interface BreadcrumbItem {
 }
 
 interface PageBannerProps {
-  title: string;
-  breadcrumbs: BreadcrumbItem[];
+  title?: string;
+  breadcrumbs?: BreadcrumbItem[];
   bgImage?: string;
 }
 
 export default function PageBanner({ title, breadcrumbs, bgImage = "/breadcrumb/breadcrumb1.jpg" }: PageBannerProps) {
+  const hasContent = title || (breadcrumbs && breadcrumbs.length > 0);
+
   return (
-    <div
-      className="relative w-full h-[350px] md:h-[400px] flex flex-col justify-center pt-24 md:pt-28"
-      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 6rem)' }}
-    >
+    <div className={`relative w-full bg-black overflow-hidden ${hasContent ? 'h-[280px] md:h-[300px] flex flex-col justify-center pt-16 md:pt-20' : 'h-16 md:h-20'}`}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0 bg-black overflow-hidden">
         <Image 
           src={bgImage} 
-          alt={title} 
+          alt={title || "Header Banner"} 
           fill
           priority
-          className="object-cover object-center blur-[4px] brightness-[0.8] scale-105"
+          className="object-cover object-center brightness-[0.4] scale-105"
         />
-        {/* Dark gradient overlay for readability of left-aligned text */}
-        <div className="absolute inset-0 bg-black/30 md:bg-gradient-to-r md:from-black/60 md:via-black/30 md:to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[#1f3f49]/50 z-20 pointer-events-none"></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 px-6 md:px-16 lg:px-24 w-full max-w-[1400px] mx-auto">
-        <h1 className="text-white text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight drop-shadow-md mb-4 md:mb-6">
-          {title}
-        </h1>
-        
-        <div className="flex items-center text-white/90 text-[15px] md:text-base font-medium">
-          {breadcrumbs.map((crumb, index) => (
-            <React.Fragment key={index}>
-              {crumb.url ? (
-                <Link href={crumb.url} className="hover:text-[#69c445] transition-colors font-semibold">
-                  {crumb.name}
-                </Link>
-              ) : (
-                <span className="text-white font-bold">{crumb.name}</span>
-              )}
-              
-              {index < breadcrumbs.length - 1 && (
-                <ChevronRight size={16} className="mx-2 md:mx-3 text-[#69c445]" strokeWidth={3} />
-              )}
-            </React.Fragment>
-          ))}
+      {/* Content: Title & Breadcrumbs */}
+      {hasContent && (
+        <div className="relative z-30 px-6 md:px-16 lg:px-24 w-full max-w-[1400px] mx-auto">
+          {title && (
+            <h1 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight drop-shadow-md mb-2">
+              {title}
+            </h1>
+          )}
+          
+          {breadcrumbs && breadcrumbs.length > 0 && (
+            <div className="flex items-center text-white/90 text-xs md:text-sm font-medium flex-wrap gap-y-1">
+              {breadcrumbs.map((crumb, index) => (
+                <React.Fragment key={index}>
+                  {crumb.url ? (
+                    <Link href={crumb.url} className="hover:text-[#8cc63f] transition-colors font-semibold">
+                      {crumb.name}
+                    </Link>
+                  ) : (
+                    <span className="text-white font-bold">{crumb.name}</span>
+                  )}
+                  
+                  {index < breadcrumbs.length - 1 && (
+                    <ChevronRight size={14} className="mx-1.5 md:mx-2 text-[#8cc63f]" strokeWidth={3} />
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 }

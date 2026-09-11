@@ -54,7 +54,7 @@ export default async function PressReleases() {
     <section id="press-releases" className="py-8 px-6 max-w-[1200px] mx-auto font-sans bg-white">
       {/* Header Section */}
       <div className="text-center mb-6">
-        <h3 className="text-[#69c445] font-bold text-sm tracking-widest uppercase mb-2">
+        <h3 className="text-[#69c445] font-semibold text-lg md:text-xl tracking-widest uppercase mb-2">
           PRESS RELEASE
         </h3>
       </div>
@@ -67,7 +67,7 @@ export default async function PressReleases() {
             href={`/press-releases/${item.id}`}
             className="block bg-white rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-md hover:border-gray-300 transition-all duration-200"
           >
-            <h4 className="text-[#1f3f49] text-xl font-bold mb-3 hover:text-[#69c445] transition-colors">
+            <h4 className="text-[#1f3f49] text-xl font-bold mb-3">
               {item.title}
             </h4>
             <p className="text-gray-400 text-sm font-medium">
