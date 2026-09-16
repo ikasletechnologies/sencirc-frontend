@@ -49,14 +49,7 @@ export default async function PressReleasePage({
 
   return (
     <div className="bg-white min-h-screen">
-      <PageBanner 
-        title="Press Release"
-        breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Press Releases", url: "/#press-releases" },
-          { name: title || "Article" }
-        ]} 
-      />
+      <PageBanner />
 
       <main className="max-w-[1000px] mx-auto px-6 py-16">
         {/* Title Section */}

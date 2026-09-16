@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect,  useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 const cycleData = [
@@ -53,9 +53,9 @@ const cycleData = [
 // slanted sides, with the four corners filleted for smooth rounding.
 const PETAL_OUTER_R = 225;
 const PETAL_INNER_R = 110;
-const PETAL_OUTER_HALF_ANGLE = 28;
-const PETAL_INNER_HALF_ANGLE = 25.5;
-const PETAL_CORNER = 18;
+const PETAL_OUTER_HALF_ANGLE = 26;
+const PETAL_INNER_HALF_ANGLE = 24;
+const PETAL_CORNER = 20;
 
 function polar(cx: number, cy: number, r: number, angleDeg: number) {
   const rad = (angleDeg - 90) * Math.PI / 180;
@@ -133,10 +133,10 @@ export default function CircularWasteCycle() {
     const animate = (time: number) => {
       const deltaTime = time - lastTime;
       lastTime = time;
-      
+
       // Speed: ~360 degrees in 40 seconds = 0.009 deg/ms
       rotationRef.current -= 0.009 * deltaTime;
-      
+
       if (wrapperRef.current) {
         wrapperRef.current.style.transform = `rotate(${rotationRef.current}deg)`;
         wrapperRef.current.style.transition = 'none'; // Ensure no CSS transition during rAF
@@ -169,7 +169,7 @@ export default function CircularWasteCycle() {
       wrapperRef.current.style.transition = 'transform 800ms ease-in-out';
       wrapperRef.current.style.transform = `rotate(${targetRotation}deg)`;
     }
-    
+
     const normalizedRotation = ((60 - targetRotation) % 360 + 360) % 360;
     const newIndex = Math.round(normalizedRotation / 60) % 6;
     setActiveIndex(newIndex);
@@ -189,14 +189,14 @@ export default function CircularWasteCycle() {
 
   const goToSlide = (i: number) => {
     setIsManualPause(true);
-    
+
     const currentNorm = ((60 - rotationRef.current) % 360 + 360) % 360;
     const targetNorm = i * 60;
-    
+
     let diff = targetNorm - currentNorm;
     if (diff > 180) diff -= 360;
     if (diff < -180) diff += 360;
-    
+
     const target = rotationRef.current - diff;
     smoothTransitionTo(target);
   };
@@ -205,27 +205,27 @@ export default function CircularWasteCycle() {
   const activeItem = cycleData[displayedIndex];
 
   return (
-    <section 
-      className="w-full bg-white pt-4 lg:pt-8 pb-24 px-6 md:px-12 overflow-hidden"
+    <section
+      className="w-full bg-white pt-4 lg:pt-4 pb-24 px-6 md:px-12 overflow-hidden"
     >
       {/* Header Section */}
-      <div className="text-center mb-8 md:mb-16 lg:mb-24 w-full">
+      <div className="text-center mb-12 md:mb-20 lg:mb-28 w-full -mt-2 md:-mt-1">
         <h2 className="text-[#1f3f49] text-xl sm:text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] leading-[1.4] font-bold w-full max-w-[1200px] mx-auto tracking-tight">
           Sencirc Has Developed Innovative Ways To Solve Challenges In The<br className="hidden lg:block" /> Waste To Value Ecosystem.
         </h2>
       </div>
 
       <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-16">
-        
+
         {/* Left: Circular Diagram */}
-        <div 
-          className="relative w-full max-w-[340px] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[600px] aspect-square flex-shrink-0 mx-auto lg:mx-0"
+        <div
+          className="relative w-full max-w-[300px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[520px] aspect-square flex-shrink-0 mx-auto lg:mx-0"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          
+
           {/* Rotating Wrapper */}
-          <div 
+          <div
             ref={wrapperRef}
             className="w-full h-full"
             style={{ transform: `rotate(60deg)` }}
@@ -233,8 +233,9 @@ export default function CircularWasteCycle() {
             <svg width="100%" height="100%" viewBox="0 0 500 500" className="overflow-visible">
               <defs>
                 <linearGradient id="sliceGradient" gradientUnits="userSpaceOnUse" x1="60" y1="40" x2="440" y2="460">
-                  <stop offset="0%" stopColor="#9bdb6e" />
-                  <stop offset="100%" stopColor="#4a9c2e" />
+                  <stop offset="0%"   stopColor="#8CC758" />
+                  <stop offset="50%"  stopColor="#78C259" />
+                  <stop offset="100%" stopColor="#67BE5A" />
                 </linearGradient>
                 <linearGradient id="sliceGradientActive" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#3d5a68" />
@@ -243,9 +244,8 @@ export default function CircularWasteCycle() {
               </defs>
 
               {cycleData.map((item, index) => {
-                const isActive = index === activeIndex;
                 const isThisHovered = index === hoveredSlice;
-                const isHighlighted = isThisHovered || (isActive && hoveredSlice === null);
+                const isHighlighted = isThisHovered;
                 const midAngle = item.mid;
                 const pathData = describePetal(250, 250, midAngle);
 
@@ -273,7 +273,7 @@ export default function CircularWasteCycle() {
                   >
                     <path
                       d={pathData}
-                      fill={isHighlighted ? "url(#sliceGradientActive)" : "url(#sliceGradient)"}
+                      fill="url(#sliceGradient)"
                       className="transition-all duration-300"
                     />
                     <g transform={`translate(${textX}, ${textY}) rotate(${textRot})`}>
@@ -281,7 +281,7 @@ export default function CircularWasteCycle() {
                         <text
                           key={i}
                           y={(i - (item.titleLines.length - 1) / 2) * lineHeight}
-                          fontSize={12}
+                          fontSize={18}
                           textAnchor="middle"
                           alignmentBaseline="middle"
                           fill="white"
@@ -298,21 +298,21 @@ export default function CircularWasteCycle() {
           </div>
 
           {/* Inner Core Circle (Static Overlay) */}
-          <div className="absolute inset-0 m-auto w-[38%] h-[38%] bg-white rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.08)] flex items-center justify-center pointer-events-none z-10 border-[1.5px] border-gray-400/70">
-            <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
-              <span className="font-black text-[#1f3f49] text-[16px] sm:text-[20px] md:text-[26px] tracking-tight">Waste</span>
-              <div className="flex flex-col justify-center gap-0.5 sm:gap-1 md:gap-2">
-                <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
-                  <ArrowUpRight className="text-[#69c445] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" strokeWidth={3}/>
-                  <span className="text-[#1f3f49] font-semibold text-[9px] sm:text-[11px] md:text-[14px] tracking-wide">SAF</span>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[25%] h-[25%] bg-white rounded-full shadow-[0_4px_25px_rgba(0,0,0,0.08)] flex items-center justify-center pointer-events-none z-10 border-[6px] border-[#69c445]">
+            <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1">
+              <span className="font-black text-[#1f3f49] text-[10px] sm:text-[12px] md:text-[14px] tracking-tight">Waste</span>
+              <div className="flex flex-col justify-center gap-[1px] sm:gap-[2px]">
+                <div className="flex items-center gap-[2px]">
+                  <ArrowUpRight className="text-[#69c445] w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-2.5 md:h-2.5" strokeWidth={3} />
+                  <span className="text-[#1f3f49] font-bold text-[7px] sm:text-[8.5px] md:text-[9.5px] tracking-wide">SAF</span>
                 </div>
-                <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
-                  <ArrowRight className="text-[#69c445] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" strokeWidth={3}/>
-                  <span className="text-[#1f3f49] font-semibold text-[9px] sm:text-[11px] md:text-[14px] tracking-wide">EFW</span>
+                <div className="flex items-center gap-[2px]">
+                  <ArrowRight className="text-[#69c445] w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-2.5 md:h-2.5" strokeWidth={3} />
+                  <span className="text-[#1f3f49] font-bold text-[6px] sm:text-[7.5px] md:text-[8.5px] tracking-wide">EFW</span>
                 </div>
-                <div className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
-                  <ArrowDownRight className="text-[#69c445] w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" strokeWidth={3}/>
-                  <span className="text-[#1f3f49] font-semibold text-[9px] sm:text-[11px] md:text-[14px] tracking-wide">RNG</span>
+                <div className="flex items-center gap-[2px]">
+                  <ArrowDownRight className="text-[#69c445] w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-2.5 md:h-2.5" strokeWidth={3} />
+                  <span className="text-[#1f3f49] font-bold text-[6px] sm:text-[7.5px] md:text-[8.5px] tracking-wide">RNG</span>
                 </div>
               </div>
             </div>
@@ -320,16 +320,16 @@ export default function CircularWasteCycle() {
         </div>
 
         {/* Right: Content Card */}
-        <div className="flex-1 w-full max-w-xl">
-          <div className="bg-white rounded-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-7 md:p-9 relative border border-black/20">
+        <div className="flex-1 w-full max-w-1xl lg:-mr-3 pr-35">
+          <div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.10)] p-7 md:p-9 relative border border-black/15 min-h-[300px] flex flex-col">
             <h3 className="text-[#69c445] text-[22px] font-bold mb-3 tracking-tight">
               {activeItem.title}
             </h3>
-            <p className="text-[#6b7280] leading-relaxed text-[15px] min-h-[100px] font-medium transition-all duration-300">
+            <p className="text-[#1a1a1a] leading-relaxed text-[18px] min-h-[100px] font-medium tracking-wide transition-all duration-300">
               {activeItem.content}
             </p>
 
-            <div className="flex justify-end gap-2.5 mt-5">
+            <div className="flex justify-end gap-2.5 mt-auto pt-5">
               <button
                 onClick={prevSlide}
                 className="w-[38px] h-[38px] rounded-full bg-[#69c445] text-white flex items-center justify-center hover:bg-[#5ca35e] transition-colors shadow-sm focus:outline-none"
@@ -348,16 +348,15 @@ export default function CircularWasteCycle() {
           </div>
 
           {/* Pagination Dots */}
-          <div className="flex justify-center gap-2.5 mt-6">
+          <div className="flex justify-center gap-2 mt-6">
             {cycleData.map((_, i) => (
-              <button 
-                key={i} 
+              <button
+                key={i}
                 onClick={() => goToSlide(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  i === displayedIndex 
-                    ? 'bg-[#69c445] w-6 shadow-sm' 
-                    : 'bg-gray-200 hover:bg-gray-300'
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === displayedIndex
+                    ? 'bg-[#69c445] shadow-sm'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
