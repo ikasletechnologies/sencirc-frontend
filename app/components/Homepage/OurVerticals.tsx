@@ -51,7 +51,7 @@ export default function OurVerticals() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="relative py-20 font-sans overflow-hidden w-full bg-[#f7f9f8]">
+    <section className="relative py-20 font-sans overflow-hidden w-full bg-white">
       <div className="relative z-10 px-4 md:px-6 max-w-[1200px] mx-auto">
         <div className="text-center mb-16 relative">
           <h3 className="text-[#5ca35e] font-bold text-sm tracking-widest uppercase mb-4">
