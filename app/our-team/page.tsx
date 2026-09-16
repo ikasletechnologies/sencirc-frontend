@@ -14,7 +14,12 @@ export default function OurTeam() {
       />
       <div id="content" className="w-full scroll-mt-16 md:scroll-mt-20">
         <TeamSection />
-        <OurPortfolio />
+        <OurPortfolio
+          links={{
+            safOne: "https://www.saf-one.co/meet-the-team",
+            zesteEnergy: "https://zeste.energy/team/",
+          }}
+        />
       </div>
     </main>
   );

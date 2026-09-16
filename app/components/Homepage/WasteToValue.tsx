@@ -48,7 +48,7 @@ export default function WasteToValue() {
           </div>
 
           {/* Row 2 */}
-          <div className="flex-1 bg-[#ebf6e7] grid grid-cols-2 sm:grid-cols-4 items-center py-5 px-3 border-b-2 border-dashed border-[#48a846]/60 gap-3">
+          <div className="flex-1 bg-[#ebf6e7] grid grid-cols-2 sm:grid-cols-3 items-center justify-items-center py-5 px-3 border-b-2 border-dashed border-[#48a846]/60 gap-3">
             <div className="flex flex-col items-center gap-2">
               <div className="w-14 h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 flex items-center justify-center relative">
                 <Image src="/new/s5.png" alt="Municipal Solid Waste" fill className="object-contain" priority />
@@ -67,7 +67,6 @@ export default function WasteToValue() {
               </div>
               <span className="text-[13px] md:text-[14px] lg:text-[15px] font-bold text-[#1f3f49] text-center">Energy (EFW)</span>
             </div>
-            <div className="hidden sm:block"></div>
           </div>
 
           {/* Row 3 */}

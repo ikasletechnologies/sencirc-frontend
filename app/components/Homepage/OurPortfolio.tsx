@@ -2,21 +2,28 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function OurPortfolio() {
+interface OurPortfolioProps {
+  links?: {
+    safOne?: string;
+    zesteEnergy?: string;
+  };
+}
+
+export default function OurPortfolio({ links }: OurPortfolioProps = {}) {
   const portfolioItems = [
     {
       id: 'saf-one',
       image: '/homepage/portfolio1.png',
       title: 'SAF One',
       description: 'Producer of pathway-agnostic Sustainable Aviation Fuel (SAF), a...',
-      link: '#',
+      link: links?.safOne || 'https://www.saf-one.co/',
     },
     {
       id: 'zeste-energy',
       image: '/homepage/portfolio2.png',
       title: 'ZESTE Energy',
       description: 'ZESTE Energy is managing Europe and UK\'s largest...',
-      link: '#',
+      link: links?.zesteEnergy || 'https://zeste.energy/',
     }
   ];
 
@@ -62,8 +69,10 @@ export default function OurPortfolio() {
               <p className="text-gray-500 text-[15px] leading-relaxed mb-6">
                 {item.description}
               </p>
-              <Link 
-                href={item.link || '#'} 
+              <Link
+                href={item.link || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#69c445] font-semibold text-[15px] hover:text-[#5ca35e] transition-colors inline-flex items-center justify-center md:justify-start"
               >
                 Visit Website

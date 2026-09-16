@@ -206,7 +206,7 @@ export default function CircularWasteCycle() {
 
   return (
     <section
-      className="w-full bg-white pt-4 lg:pt-4 pb-24 px-6 md:px-12 overflow-hidden"
+      className="w-full bg-white pt-4 lg:pt-4 pb-24 px-5 overflow-hidden"
     >
       {/* Header Section */}
       <div className="text-center mb-12 md:mb-20 lg:mb-28 w-full -mt-2 md:-mt-1">
@@ -215,7 +215,7 @@ export default function CircularWasteCycle() {
         </h2>
       </div>
 
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-16">
+      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-16">
 
         {/* Left: Circular Diagram */}
         <div
@@ -238,8 +238,8 @@ export default function CircularWasteCycle() {
                   <stop offset="100%" stopColor="#67BE5A" />
                 </linearGradient>
                 <linearGradient id="sliceGradientActive" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3d5a68" />
-                  <stop offset="100%" stopColor="#1f3f49" />
+                  <stop offset="0%" stopColor="#5ca35e" />
+                  <stop offset="100%" stopColor="#48a846" />
                 </linearGradient>
               </defs>
 
@@ -273,7 +273,7 @@ export default function CircularWasteCycle() {
                   >
                     <path
                       d={pathData}
-                      fill="url(#sliceGradient)"
+                      fill={isHighlighted ? "url(#sliceGradientActive)" : "url(#sliceGradient)"}
                       className="transition-all duration-300"
                     />
                     <g transform={`translate(${textX}, ${textY}) rotate(${textRot})`}>
@@ -320,7 +320,7 @@ export default function CircularWasteCycle() {
         </div>
 
         {/* Right: Content Card */}
-        <div className="flex-1 w-full max-w-1xl lg:-mr-3 pr-35">
+        <div className="flex-1 w-full max-w-xl">
           <div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.10)] p-7 md:p-9 relative border border-black/15 min-h-[300px] flex flex-col">
             <h3 className="text-[#69c445] text-[22px] font-bold mb-3 tracking-tight">
               {activeItem.title}
