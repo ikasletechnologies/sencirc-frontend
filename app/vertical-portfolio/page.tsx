@@ -3,7 +3,7 @@ import VerticalTabs from "../components/Verticalpage/VerticalTabs";
 
 export default function VerticalPortfolioPage() {
     return (
-        <section>
+        <main className="flex min-h-screen flex-col items-center bg-white w-full">
             <PageBanner
                 title="Vertical Portfolio"
                 breadcrumbs={[
@@ -14,6 +14,6 @@ export default function VerticalPortfolioPage() {
             <div id="content" className="w-full scroll-mt-16 md:scroll-mt-20">
                 <VerticalTabs />
             </div>
-        </section>
+        </main>
     )
 }

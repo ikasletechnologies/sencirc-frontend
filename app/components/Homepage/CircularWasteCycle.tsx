@@ -119,6 +119,9 @@ export default function CircularWasteCycle() {
   const [hoveredSlice, setHoveredSlice] = useState<number | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isManualPause, setIsManualPause] = useState(false);
+  const [isCardHovered, setIsCardHovered] = useState(false);
+
+  const isCardDark = isCardHovered || hoveredSlice !== null;
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const rotationRef = useRef(60);
@@ -238,14 +241,13 @@ export default function CircularWasteCycle() {
                   <stop offset="100%" stopColor="#67BE5A" />
                 </linearGradient>
                 <linearGradient id="sliceGradientActive" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#5ca35e" />
-                  <stop offset="100%" stopColor="#48a846" />
+                  <stop offset="0%" stopColor="#2a5360" />
+                  <stop offset="100%" stopColor="#1f3f49" />
                 </linearGradient>
               </defs>
 
               {cycleData.map((item, index) => {
-                const isThisHovered = index === hoveredSlice;
-                const isHighlighted = isThisHovered;
+                const isHighlighted = index === displayedIndex;
                 const midAngle = item.mid;
                 const pathData = describePetal(250, 250, midAngle);
 
@@ -263,10 +265,10 @@ export default function CircularWasteCycle() {
                 return (
                   <g
                     key={item.id}
-                    className="cursor-default transition-all duration-300"
+                    className="cursor-pointer transition-all duration-300"
                     style={{
                       transformOrigin: '250px 250px',
-                      transform: isHighlighted ? 'scale(1.03)' : 'scale(1)'
+                      transform: isHighlighted ? 'scale(1.04)' : 'scale(1)'
                     }}
                     onMouseEnter={() => setHoveredSlice(index)}
                     onMouseLeave={() => setHoveredSlice(null)}
@@ -321,11 +323,27 @@ export default function CircularWasteCycle() {
 
         {/* Right: Content Card */}
         <div className="flex-1 w-full max-w-xl">
-          <div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.10)] p-7 md:p-9 relative border border-black/15 min-h-[300px] flex flex-col">
-            <h3 className="text-[#69c445] text-[22px] font-bold mb-3 tracking-tight">
+          <div
+            onMouseEnter={() => setIsCardHovered(true)}
+            onMouseLeave={() => setIsCardHovered(false)}
+            className={`rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.10)] p-7 md:p-9 relative border min-h-[300px] flex flex-col transition-all duration-500 ease-in-out cursor-pointer ${
+              isCardDark
+                ? 'bg-[#1f3f49] border-[#1f3f49] shadow-xl'
+                : 'bg-white border-black/15'
+            }`}
+          >
+            <h3
+              className={`text-[22px] font-bold mb-3 tracking-tight transition-colors duration-300 ${
+                isCardDark ? 'text-white' : 'text-[#69c445]'
+              }`}
+            >
               {activeItem.title}
             </h3>
-            <p className="text-[#1a1a1a] leading-relaxed text-[18px] min-h-[100px] font-medium tracking-wide transition-all duration-300">
+            <p
+              className={`leading-relaxed text-[18px] min-h-[100px] font-medium tracking-wide transition-colors duration-300 ${
+                isCardDark ? 'text-white/90' : 'text-[#1a1a1a]'
+              }`}
+            >
               {activeItem.content}
             </p>
 
